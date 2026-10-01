@@ -185,3 +185,4 @@ auto_limits_with_auto_coverage.yaml,auto_limits_with_auto_coverage.yaml,True,182
 hard_cases_for_limits.yaml,hard_cases_for_limits.yaml,True,183
 stated_amt_with_coverage.yaml,stated_amt_with_coverage.yaml,True,184
 sublimit_with_multiple_coverage.yaml,sublimit_with_multiple_coverage.yaml,True,185
+sublimit_with_multiple_coverage.yaml,sublimit_with_multiple_coverage.yaml,True,186
