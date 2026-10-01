@@ -1,0 +1,37 @@
+field: 'limits'
+
+also_appears_as: ["{alternate_limits}"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt do not hallucinate."
+
+what_to_extract:
+  limits:
+    description: |
+      A list where each item has:
+        - stated amount:
+          - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "Stated Value 24,205", "$2,010,000 Actual Cash Value", "27,645").'
+          - 'Ignore values that belong to "{invalid_coverage}".'
+          - 'Do not extract the amount from premium.'
+          - 'Do not extract from "Deductible", "Comp Deductible" or "Comp Deductible".'
+          - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
+
+        - auto coverage for limits:
+          - 'Associated description given by "vehicle", "VIN" etc and additionally ("VIN: 123ABC8576888", "ID NO 4DRBUAFN67B123456").'
+          - 'coverage and vehicle information like "VIN" number and model will present in the context of "Stated Amount"(limit header) header.'
+
+        - line_of_business:
+          - 'Extract the line of business (LOB) for each row.'
+          - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+
+    rules:
+      - 'Extract single line limits as well which are not in tabular format'
+      - 'Skip entries where "{deductible}" is mentioned.'
+      - 'Skip rows containing "{invalid_headers}" or with no valid limit amount.'
+      - 'Do not leave "coverage for limits" blank — always pull the description from the "VIN", "Vehical Identification Number" as the limit.'
+      - 'Preserve formatting exactly as shown in the source
+        (e.g., "Stated Amount $52,000", "$100,000 Actual Cash Value").'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+
+output_fields: ['stated amount', 'auto coverage for limits', 'line_of_business']

@@ -1,0 +1,44 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      Extract every deductible, retention value found in the image.
+      For each deductible entry return:
+
+      - deductible amount
+          - "Context of the Deductible headers will be '{deductible}'."
+          - "Extract deductible values in currency format such as ('$500', 'CAD $100,000.00', '$250,000.00', '$1,000 deductible', '$100,000 Minus', '5% subj. to a $1,000 min')."
+          - "Deductible values may also be expressed as percentages or waiting periods such as ('48 Hours', '72 hours')."
+          - "Deductible values may appear under headers such as Deductible, Retention, Retentions, Retention/Attachment, Self Insured Retention (SIR), Attachment, or Waiting Period."
+          - "If a table contains a Retention, Retentions, Retention/Attachment, SIR, or Attachment column, every value in that column must be treated as a deductible amount."
+          - "Do not exclude a value simply because it is a large currency amount."
+          - "If the deductible header found '{deductible}', extract all deductible values under that header or same column."
+          - "While extracting deductible values ignore unrelated headers such as '{invalid_headers}' and '{limits}'."
+
+      - coverage for deductible
+          - "Extract the coverage from the '{top_coverage}' field or coverage column."
+          - "Always take the coverage name from the same row or line as the deductible value."
+          - "For waiting periods, use 'Waiting Period' as the coverage."
+          - "When multiple deductible values exist for different coverages, return a separate deductible entry for each coverage."
+          - "When extracting from a Retention, Retentions, Retention/Attachment, SIR, or Attachment column, use the coverage from the same row."
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+rules:
+     - '**CRITICAL: Extract all $ amount values when keywords appear: "{deductible}" these are deductibles.**'
+     - '**CRITICAL: If a table contains a "Retention", "Retentions", "Retention/Attachment", "SIR", "Self Insured Retention", extract every value in that column as a deductible amount.**'
+     - '**CRITICAL: Values appearing under a Retention/Attachment column are deductible values even if the amounts are very large (for example CAD $10,000,000 or CAD $90,000,000).**'
+     - '**CRITICAL: When a Retention/Attachment column exists, extract values only from that column and do not confuse values from Limit of Liability columns as deductibles.**'
+     - 'Extract all time based values ending with "hours", "hour". These must always be treated as deductible values.'
+     - 'Waiting period values must always have coverage set to "Waiting Period".'
+     - 'Do not extract values from rows or columns containing "{limits}" or "Coverage Sublimits" unless the value is under a deductible, retention, retention/attachment, SIR, or waiting period column.'
+     - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+     - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+     - 'If a table has a "Retention" column, extract the values from that column as deductible for each coverage row.'
+     - 'Skip rows containing "{invalid_headers}", "form number", "form no" or with no valid deductible amount.'
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

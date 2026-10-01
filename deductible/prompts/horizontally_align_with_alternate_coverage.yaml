@@ -1,0 +1,30 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+        - deductible amount:
+            - 'Must contain only currency values related to policy deductible (examples: "$60,000", "20 hours", "10 hours time deductible", "$2,000,000 deductible", "$1,000,000 Each Occurrence").'
+            - 'Don't extract the amount from these or under these "{invalid_headers}".'
+            - 'Don't extract the amount from premium'.
+
+        - coverage for deductible:
+            - 'Associated description given by "inventory/storage" etc.'
+            - 'Return the full name including header + description.'
+
+        - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+    rules:
+      - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+      - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+      - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']

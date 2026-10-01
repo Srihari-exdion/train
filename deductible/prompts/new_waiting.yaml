@@ -1,0 +1,39 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+deductible:
+description: |
+  A list where each item has:
+
+     - deductible amount:
+        - 'The deductible value (examples: "$500","$250,000.00").' "{extra_info}"
+        - 'Include "Waiting Period" values (e.g: "4 hours", "1 hour").'
+        - 'Values that appear under a column titled "Waiting Period" must always be treated as deductible values.'
+        - 'Include retention values (e.g: "$10,000", "$0").'
+        - 'Include all time-based deductible values (examples: "4 hours", "1 hour").'
+        - 'Extract values exactly as shown in the document.'
+        - 'Ignore values that belong to "{invalid_coverage}".'
+        - 'Do not extract the amount from premium.'
+        - 'If multiple deductible values appear on the same row (for example: "8 hours" and "$0"), combine them into a single comma-separated string.'
+
+     - coverage for deductible:
+        - 'Associated description given by "{coverages}".'
+        - 'Extract the full description from the "{coverages}" column that is on the same row as the deductible amount.'
+        - 'Use ROW-WISE alignment when extracting values from tables.'
+        - 'For waiting period values, use the corresponding "{coverages}" value from the same row.'
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+  rules:
+    - 'Values located under a column named "Waiting Period" MUST always be extracted as deductible amounts.'
+    - 'Extract deductible values from columns such as Retention, Waiting Period, Period of Restoration, Period of Indemnity, or similar deductible-related columns.'
+    - 'Skip rows containing "premium", "form number", "form no", "premium values" or with no valid deductible amount.'
+    - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+    - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+    - '**CRITICAL: extract all time based values ending with  "hours", "hour". These must always be treated as deductible values.**'
+    - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

@@ -1,0 +1,40 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      Extract deductible information strictly using ROW-WISE (horizontal) alignment.
+
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible value (examples: "20,000", "$500", "20 hours", "10%","$250,000.00")'. "{extra_info}"
+          - 'Include waiting period values (e.g., "48 hours", "8 hours") in this same field.'
+          - 'Don't extract the amount from these or under these "{invalid_headers}".'
+          - 'Do NOT extract premium amounts.'
+
+      - coverage for deductible:
+          - 'The associated coverage description from the "{coverages}" column.'
+          - 'ALWAYS select the coverage text that appears on the SAME HORIZONTAL ROW as the deductible amount.'
+          - 'Never assign a deductible to a coverage above or below it.'
+          - 'If multiple coverages appear in a block and only the last row contains a deductible, assign it to the LAST coverage.'
+          - 'For waiting periods, use "Waiting Period" as the coverage.'
+          - 'Extract the full coverage description exactly as written.'
+
+      - line_of_business:
+        - 'extract the line_of_business(lob) from the page.'
+
+  rules:
+    - 'Process the document row-by-row from top to bottom.'
+    - 'Match values LEFT --> RIGHT within the same row.'
+    - 'Only extract rows containing a numeric deductible, percentage, retention, or time period (e.g., "72 hours").'
+    - 'Skip rows containing "{invalid_headers}", "form number", "form no", or premium values.'
+    - 'Do not leave "coverage for deductible" blank.'
+    - 'If a value contains "NOT APPLICABLE", omit that entry entirely.'
+    - 'Do not infer or borrow values from nearby rows.'
+    - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+    - '**CRITICAL: All time based things which are ends with "hours", "hour" are deductible.**'
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

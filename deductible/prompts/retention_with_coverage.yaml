@@ -1,0 +1,42 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  retention:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The retention value (examples: "$25,000", "20,000", "10%", "5% Hurr Cal", "5% subject to a $1,000 minimum", "$250,000 US").'  "{extra_info}" 
+          - 'Include time-based values such as waiting periods (examples: "8 Hours", "1 Hour", "48 hours").'
+          - 'Only extract values from the "Retention / Sub-Retention" column.'
+          - 'Do NOT extract values from the "Limit / Sub-Limit" column.'
+          - 'Ignore premium-related values.'
+          - 'Treat "Retention" and "Sub-Retention" as equivalent.'
+
+      - coverage for deductible:
+          - 'Extract the full corresponding "First Party Expense", "{coverage}" description from the same row.'
+          - 'For waiting periods, use the "Waiting period" as coverage.'
+          - 'Do NOT leave this field blank.'
+          - 'Ensure mapping is strictly row-wise (no cross-row mapping).'
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+  rules:
+    - 'STRICT RULE: extract values under "Retention / Sub-Retention / First Party Retention" these are deductibles.'
+    - '**CRITICAL: Extract values when keywords appear: "{deductible}" these are deductibles**.'
+    - 'Skip rows where retention value is "N/A" or "Not Applicable".'
+    - 'Skip rows without a valid numeric or time-based retention value.'
+    - 'Do NOT extract anything from headers, section titles, or unrelated text.'
+    - 'If multiple retention values exist in one row, extract all separately with correct coverage mapping.'
+    - 'Preserve values exactly as written (no normalization, no inference).'
+    - 'Do NOT confuse limits as retention (even if values look similar).'
+    - 'Extract every "$" amount and classify them which are deductibles / retention, DO NOT SKIP any "$" amount.'
+    - 'Extract every "hours"/"hrs" and classify them which are waiting periods/ first part waiting period.'
+    - 'Skip rows containing "{invalid_headers}", "form number", "form no" or with no valid deductible amount.'
+    - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']
+

@@ -1,0 +1,39 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      Extract deductible-related values from structured tables and surrounding text.
+
+      Each object MUST contain:
+
+      - deductible amount:
+          - Capture the exact value as written (examples: "$25,000", "$50,000", "8 Hours").
+          - Focus on values explicitly labeled as "Deductible", "Retention", or "Waiting Period".
+          - In tables, identify the row where the type column indicates "Deductible".
+          - Extract values per column (e.g., Option 1, Option 2) as separate objects.
+          - Do NOT modify or normalize values.
+          - Exclude premiums, fees, totals, and unrelated numeric values.
+
+      - coverage for deductible:
+          - Extract the coverage name associated with the deductible row (example: "Ambridge Professional Liability").
+          - Use the left-most row header or section title tied to the deductible.
+          - Do NOT use unrelated sections like Premium, Fees, or Endorsements.
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+rules:
+  - 'Prioritize structured tables when present.'
+  - 'Identify deductible rows using explicit labels like "Deductible".'
+  - 'Extract each column value independently when multiple options are present.'
+  - 'Ignore rows labeled "Per Claim", "Aggregate", "Policy Premium", "Total Payable", or similar unless they also include deductible keywords.'
+  - 'Do NOT extract values from "Admin Fee", "{invalid_headers}",  or "Total" rows.'
+  - 'Do NOT merge multiple deductible values into one object.'
+  - 'Do NOT infer missing labels or coverage.'
+  - 'Preserve exact formatting of extracted values.'
+  - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

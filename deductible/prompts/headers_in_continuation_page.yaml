@@ -1,0 +1,44 @@
+field: 'deductible'
+
+also_appears_as: ["deductibles","{deductible}"]
+
+what_to_extract:
+deductible:
+  description: |
+  A list where each item has:
+    - deductible amount:
+        - 'The deductible value (examples: "$500", "20 hours", "10%", "$250,000.00 Each Occurrence").'
+        - 'Include percentage-based deductibles (eg: "5% of total insured values") along with any minimum (eg: "subject to a minimum of $250,000") in the same field.'
+        - 'Include "Waiting Period" values (eg:  "48 hours") in the same field.' 
+        - 'Include values like "Same as AOP" as-is.'
+        - 'Dont extract the amount from these or under these "{invalid_headers}".'
+        - 'Dont extract the amount from premium.'
+        - '**In between headers and the "$" amounts you may find huge gap between "deductibles" and $ amount values — ignore [[section_top_end]] and [[section_bottom_start]] and extract vertically aligned deductible $ amount values from table rows.**'
+
+
+    - subdeductible and aggregate:
+        - 'Extract the sub-deductible or aggregate label (eg: "{sublimits_and_aggregates}") found near the deductible amount if present.'
+        - 'If no subdeductible or aggregate is mentioned, return "".'
+        - 'You will find a header on the top like (eg: "Retention", "RETENTIONS:", "Deductibles") — extract every deductible value under these headers.'
+
+    - coverage for deductible:
+      - 'Associated description given by "{top_coverage}" etc.'
+      - 'Extract the full coverage description from the same row as the deductible amount (left column aligned with the value).'
+      - 'I hardcoded the coverage for deductibles in "{top_coverage}".'
+      - 'For waiting periods, use "Waiting Period" as the coverage.'  
+
+    - line_of_business:
+      - 'extract the line_of_business(lob) from the page.'
+
+rules:
+- 'You will find a header on the top like (eg: "Retention", "RETENTIONS:", "Deductibles") — under these headers the vertically aligned $ amount values belong to deductibles.'
+- '**In between headers and the "$" amounts you may find huge gap between "deductibles" and $ amount values — ignore [[section_top_end]] and [[section_bottom_start]] and extract vertically aligned deductible $ amount values from table rows.**'
+- 'Ignore sections like "Territorial Limits", "Blanket Amount", or "Limits of Liability".'
+- 'Extract values row-wise based on horizontal alignment: coverage (left) → deductible (right).'
+- 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+- 'If a row contains "Not Applicable", omit the entire row.'
+- 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+- 'Preserve original formatting (eg: "$100,000", "5%").'
+- 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]

@@ -1,0 +1,38 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}", "Self-Insured Retention", "Retention", "SIR", "Retained Limit"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list of objects capturing deductible or retention values. 
+      **Note**: In many documents, this is specifically labeled as "Self-Insured Retention" or "Retention".
+
+      - "deductible amount":
+          - 'Extract values found under headers like "Self-Insured Retention", "Retention", or "Ded".' '"{extra_info}"'
+          - 'Include currency (e.g., "$100,000") and time-based values (e.g., "8 Hours",  "24 Hour Waiting Period").'
+          - 'Ignore values that are purely "Premiums" or "Limits".'
+          - 'Don't extract the amount from these or under these "{invalid_headers}".'
+
+      - "coverage for deductible":
+          - 'The description of the coverage the deductible applies to.'
+          - 'If the table has nested rows (e.g., "Business Interruption" -> "System Failure"), combine them: "Business Interruption - System Failure".'
+          - 'For waiting periods, include the full name of the coverage (e.g., "Reputational Harm Waiting Period").'
+
+      - line_of_business:
+       - 'extract the line_of_business(lob) from the page.'
+
+  rules: 
+     - 'CRITICAL: Treat any value under a "Self-Insured Retention" or "Retention" column as a deductible.'
+     - 'Treat time-based values (hours, hour) specifically as deductibles/waiting periods.'
+     - 'If a table has multiple columns under "Retention" (e.g., "Each Claim", "Aggregate", "Maintenance"), create a separate entry for each non-empty value.'
+     - 'Skip rows containing "Premium", "Form Number", or "Continuity Date".'
+     - 'Preserve formatting exactly as shown in the document (e.g., "$5,000 each Claim").'
+     - 'If a value is "NOT APPLICABLE", "N/A", or "NOT COVERED", omit the entry entirely.'
+     - 'Dont extract the amount from these or under these "{invalid_headers}".'
+     - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+     - 'dont extract which are containing "Endorsement" like (eg: "SSPN-018 07 23 -- Notice To Texas Policy Holder", "PR 037 (02/12)-- Leasehold Interest Endorsement").'
+     - 'extract only from "Ded/Ret Amount" column these are valid deductibles.'
+     - 'dont extract under "Excess of" because under these columns the deductible amount is not valid.'
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

@@ -1,0 +1,37 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible or retention value (examples: "$250","$100,000", "20 hours", "1%", "$250,000 each Claim", "Aggregate/$250,000 SIR").' "{extra_info}"
+          - 'Include "Waiting Period" values (e.g., "48 hours", "24 hour") in the same column.'
+          - 'Ignore values that belong to "{invalid_coverage} and {invalid_headers}".'
+          - 'Don't extract the amount from premium, limits, aggregate limits, or sublimits unless explicitly labeled as deductible or retention.'
+         
+      - subdeductible and aggregate:
+        - 'Extract the sub-deductible or retention label (eg: "{sublimits_and_aggregates}") found near the deductible amount.'
+        - 'Examples include: "Employment Practices Liability", "Third Party Liability", "High Wage Earners Retention", "Mass or Class Retention", "Waiting Period", "Compensation Threshold".'
+
+      - coverage for deductible:
+          - 'Associated description given by "{coverage}" etc.'
+          - 'Extract every "$" amount under these "{deductible}"/ Retentions section.'
+          - 'If there are multiple deductible/retention amounts with different coverage and descriptions, extract all of them separately.'
+          - 'deductible/retention amounts will be in description extract them which having "$" amount.'
+         
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+  rules: 
+     - '**CRITICAL: extract all time based values ending with "hours", "hour", "days", "weeks". These must always be treated as deductible values.**'
+     - 'Extract values under sections titled Deductible, Deductibles, Retention, Retentions, Self Insured Retention, SIR.'
+     - 'Do NOT extract values from Limits, Aggregate Limits, Sublimits, Premium, Taxes, Fees, or Summary of Charges.'
+     - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+     - 'Do not leave "coverage for deductible" blank — always pull the description from the same row or section as the deductible.'
+     - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+
+output_fields: ['deductible amount','subdeductible and aggregate', 'coverage for deductible', 'line_of_business']

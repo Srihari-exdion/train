@@ -1,0 +1,38 @@
+field: 'deductible'
+also_appears_as: ["{deductible}"]
+ 
+what_to_extract:
+ 
+deductible:
+ 
+    description: |
+        A list where each item has:
+ 
+            - "deductible amount":
+                - 'Must contain only currency values related to policy deductible (examples: "$500", "20 hours", "10%", "$250,000.00 each Claim").'
+                - If there are two deductible values on the same row (e.g., "comp ded", "coll ded"), combine them into a single string separated by a comma.
+                - Include "Waiting Period" values (e.g., "48 hours") in the same field.  
+                 - 'Don't extract the amount from these or under these "{invalid_headers}".'
+                - 'Don't extract the amount from premium'.
+ 
+            - subdeductible and aggregate:
+                - Extract the sub-deductible label (e.g., "comp ded", "coll ded") found on the same row as the deductible amount.
+                
+            - "coverage for deductible":
+                - 'Must include the associated description given by "VIN".(example: "1D9HU12161G224009")'
+                - For waiting periods, use "Waiting Period" as the coverage.  
+                - Do not leave this blank — always pull the description from the same row as the deductible.
+ 
+            - line_of_business:
+              - 'extract the line_of_business(lob) from the page.'
+
+    rules:
+    - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+    - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+    - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+            
+            
+          
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]        
+ 
+    

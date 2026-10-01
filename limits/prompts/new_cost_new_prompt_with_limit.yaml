@@ -1,0 +1,46 @@
+field: "limits"
+ 
+also_appears_as: ["{alternate_limits}", "Coverage Limits", "Stated Values", "Original Cost New", "Purchased"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt do not hallucinate."
+ 
+what_to_extract:
+  limits:
+    description: |
+      A list where each item captures specific values from different sections of the document.
+ 
+      - "cost new amount":
+        - 'Extract values from "Original Cost New", "Purchased", or "{alternate_limits}" columns. examples: "$33,640", "$74,430", "46,315 ACV". "{extra_info}"'
+        - 'Ignore values that belong to "{invalid_coverage}".'
+ 
+      - "cost new coverage":
+        - 'Associated description given by "{vin_coverage}" and vehicle details.'
+        - 'Combine Year, Make, Model, and VIN (e.g., "2003 Chevrolet... 1GCHK...").'
+        - 'Always include the VEHICLE IDENTIFICATION NUMBER (VIN) here.'
+      
+      - "covered auto limit amount":
+        - 'Extract liability thresholds from the "LIMIT" or "{auto_coverage}" columns (e.g., "$1,000,000").'
+        - 'Do not extract from "Premiums" or "Premium" columns.'
+ 
+      - "covered auto coverage":
+        - 'Associated description given by "{auto_coverage}" and "coverages".'
+        - 'Use the "Covered Auto No." and specific coverage header (e.g., "Auto 6 Liability").'
+
+      - line_of_business:
+        - 'Extract the line of business (LOB) for each row.'
+        - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+ 
+    rules:
+      - 'CRITICAL: Scan every table. You MUST extract from the top "DESCRIPTION/PURCHASED" table AND the bottom "COVERAGES" table separately.'
+      - 'Extract multiple limit entries from multiple tables with respective headers.'
+      - 'Extract single line limits as well which are not in tabular format.'
+      - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
+      - 'Skip entries where "{deductible}" is mentioned.'
+      - 'Skip rows containing "{invalid_headers}" or with no valid amount.'
+      - 'Do not leave coverage fields blank — always pull the description/VIN from the same row or section as the amount.'
+      - 'Preserve formatting exactly as shown in the source (e.g., "$1,000,000", "VIN 1GCHK...").'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+ 
+output_fields: ['cost new coverage', 'cost new amount', 'covered auto coverage', 'covered auto limit amount', 'line_of_business']

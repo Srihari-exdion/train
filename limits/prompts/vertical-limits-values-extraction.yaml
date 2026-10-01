@@ -1,0 +1,38 @@
+field: 'limits'
+
+also_appears_as: ["{proposal_limit_headers}"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt do not hallucinate."
+
+what_to_extract:
+  limits:
+    description: |
+      A list where each item has:
+        - limit amount:
+            - 'Extract values which are related to the context of limits. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "2,010,000 USD", "$645,596").'
+            - 'Ignore values that belong to "{invalid_coverage}".'
+            - 'Strictly ignore values belonging to: "{invalid_coverage}" or headers like: "{invalid_headers}".'
+            - 'extract all "{proposal_limit_headers}" column or row if you finds extract all $ amount that you found under these "{proposal_limit_headers}" headers.'
+            - 'if there is any context of "{invalid_limits_for_cost_new}", "limits","limit", "Limit of Insurance",,"{deductible}", "Comp Ded", "Coll Ded" dont extract cause its invalid limits.'
+            - 'Do not extract from ded .'
+      
+
+        - coverage for limits:
+            - 'Associated coverage given in under "{coverage}" header..'
+            - 'Strictly ignore values belonging to: "{invalid_coverage}" or headers like: "{invalid_headers}".'
+
+        - line_of_business:
+            - 'Extract the line of business (LOB) for each row.'
+            - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+
+    rules:
+      - 'Skip entries where "forms", "{deductible}" is mentioned.'
+      - 'extract "amount" column into limits.'
+      - 'Skip rows containing "{invalid_headers}" or with no valid limit amount.'
+      - 'Do not leave "coverage for limits" blank — always pull the description from the same row as the limit.'
+      - 'Preserve formatting exactly as shown in the source (e.g., "$250k defense sublimit", "$250K sublimit non-monetary defense").'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+
+output_fields: ['limit amount','coverage for limits', 'line_of_business']

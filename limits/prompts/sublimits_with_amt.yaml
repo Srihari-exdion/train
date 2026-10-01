@@ -1,0 +1,50 @@
+field: 'limits'
+
+also_appears_as: ["{limits}"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt do not hallucinate."
+
+what_to_extract:
+  limits:
+    description: |
+      A list where each item represents a single row of coverage and has:
+
+        - limit amount:
+          - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "$2,010,000 Aggregate", "$1,010,000 Each Occurrence"). "{extra_info}"'
+          - 'CRITICAL: If a value is found under a header like "Retention", "Self-Insured Retention", or "SIR", it is a DEDUCTIBLE. DO NOT extract it here.'
+          - 'Ignore values that belong to "{invalid_coverage}".'
+          - 'Combine all valid currency limits from the "{sublimits_and_aggregates}" columns on the same line into a single comma-separated string.'
+          - 'Must contain only currency values **with the dollar symbol ($) included exactly as shown in the document**'
+          - 'Do not extract the amount from "premium"'
+          - '"Retained Limits" is Deductible, so do not extract any "Retained Limits" amount or coverage'
+          - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
+
+        - coverage for limits:
+            - 'Associated description given by LIABILITY "{coverage}" etc.'
+            - 'The identifier for the row. You MUST combine the column header with the value.'
+            - 'Example: If the header is "Designation Or Description Of Vehicle" and the value is "1", the output must be "Designation 1".'
+
+        - sublimits and aggregate with amount:
+            - 'CRITICAL: You MUST pair every amount with its exact column header text.'
+            - 'Combine the labels "{sub_limit_with_amt}" from the column headers with their corresponding amounts.'
+            - 'Look at the top of the column to find the label for the amount.'
+            - 'Format: "[Header Name] [Amount]".'
+            - 'Example: "Monthly Work Loss $2,000, Other Expenses (Per Day) $25, Additional Death Benefit $0".'
+            - 'If the amount is "$ Included", you can skip it, but extract all numerical values.'
+        - line_of_business:
+          - 'Extract the line of business (LOB) for each row.'
+          - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+
+    rules:
+      - 'STRICT RULE: Headers like "Retention", "Self-Insured Retention", or "SIR" belong to Deductibles only. Skip all values under these headers.'
+      - 'Extract single line limits as well which are not in tabular format.'
+      - 'Skip entries where "deductible", "retention", "coverage retention", "insured entity retention", or "waiting period" is mentioned.'
+      - 'Skip rows containing "premium", "form number", "form no", "premium values" or with no valid limit amount.'
+      - 'Do not leave "coverage for limits" blank — always pull the description from the same row as the limit.'
+      - 'Preserve formatting exactly as shown in the source (e.g., "Limits $100,000", "Monthly Work Loss $2,000", "Other Expenses (Per Day) $25").'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'Each output object in the list must correspond to a single row of coverage from the document, combining all relevant data points from that row.'
+
+output_fields: ['limit amount', 'coverage for limits', 'sublimits and aggregate with amount', 'line_of_business']

@@ -1,0 +1,41 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item represents a deductible entry and has:
+
+        - deductible amount:
+          - 'Must contain only deductible-related values such as "$250,000", "$250k", "$250,000 SIR", "$250k x $250k".'
+          - 'Extract values that represent retention, SIR (Self-Insured Retention), or deductible amounts even if the word "deductible" is not explicitly mentioned.'
+          - 'If multiple deductible values exist in the same row (e.g., "$250k x $250k", "$250,000 Each Event / $250,000 Aggregate"), combine them into a single string separated by a comma.'
+          - 'Normalize shorthand values like "$250k" as-is (do not expand unless required).'
+          - 'Do not extract values unrelated to deductible (ignore general limits unless clearly tied to SIR or retention).'
+
+        - subdeductible and aggregate:
+          - 'Extract associated labels such as "{sublimits_and_aggregates}" etc., from the same text.'
+          - 'If multiple deductible values exist with different labels, extract each separately with its corresponding label.'
+          - 'If no clear label exists, omit this field.'
+
+        - coverage for deductible:
+          - 'Extract the full title from the "{coverage}" column corresponding to the deductible.'
+          - 'Each deductible must be mapped to its respective row title.'
+
+        - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+    rules:
+      - 'Extract deductible values only from the "Comments" column.'
+      - 'Treat "SIR" (Self-Insured Retention) as deductible.'
+      - 'Extract rows only where numeric monetary values are present.'
+      - 'Ignore rows with empty comments or no financial values.'
+      - 'Do not extract dates, due dates, or unrelated financial figures.'
+      - 'Skip rows containing only descriptive text without numeric values.'
+      - 'If a key has no value, omit it entirely (do not return null, "", or NA).'
+      - 'If a value contains "NOT APPLICABLE", omit that entry entirely.'
+      - '**CRITICAL: patterns like "$250k x $250k", "$250,000 Each Event", "$250,000 Aggregate", "$250,000 SIR" must all be treated as deductible values.**'
+      - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]

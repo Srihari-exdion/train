@@ -1,0 +1,43 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+
+  deductible:
+
+    description: |
+      A list where each item represents a single deductible entry and has:
+
+        - deductible amount:
+          - 'Must contain only currency values related to policy deductible (examples: "$1,000", "20 hours", "10%", "$250,000.00").'
+          - 'Don't extract the amount from these or under these "{invalid_headers}".'
+          - 'there will be separate $ sign for "Per Claim Deductible" and "Annual Aggregate".'
+          - 'do not duplicate the amount for other "Per Claim Deductible" and belonging coverage.'
+          - 'if you find one $ amount for "Per Claim Deductible" and blonging coverage extract that only rest ignore.'
+          - 'Extract the numeric value that appears in the SAME ROW immediately before the label "Per Claim Deductible" dont extract the $ amount from "Annual Aggregate".'
+
+        - coverage for deductible:
+          - 'Extract the full description from the "{coverage}" column that is on the same row as the deductible amount.'
+          - 'there will be separate $ sign for "Per Claim Deductible" and "Annual Aggregate".'
+          - 'Extract the numeric value that appears in the SAME ROW immediately before the label "Per Claim Deductible".'
+          - 'do not duplicate the amount for other "Per Claim Deductible" and belonging coverage.'
+          - 'if you find one $ amount for "Per Claim Deductible" and blonging coverage extract that only rest ignore.'
+        
+        - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+rules:
+    - 'Only extract data from rows that have a numerical deductible amount.'
+    - 'Do not extract anything from rows that contain only a dollar sign ($) or no numerical value.'
+    - 'Skip rows containing "premium", "form number", "form no", "premium values" or with no valid deductible amount.'
+    - 'If a key has no value, omit the key entirely (do not return null or "").'
+    - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+    - 'If a key has "NOT APPLICABLE" in the value, omit the key entirely (do not return null or "").'
+    - 'dont extract which are containing "Endorsement" like (eg: "SSPN-018 07 23 -- Notice To Texas Policy Holder", "PR 037 (02/12)-- Leasehold Interest Endorsement").'
+
+
+output_fields: ["deductible amount",  "coverage for deductible", "line_of_business"]        
+
+
+
+

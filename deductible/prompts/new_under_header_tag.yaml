@@ -1,0 +1,37 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}", "Self-Insured Retention", "Retention", "SIR", "Retained Limit"] 
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item represents a deductible or retention value:
+
+      - "deductible amount":
+          - 'Extract values found under headers like "Self-Insured Retention", "Retention", "SIR", or "Ret".'
+          - 'The value can be currency (e.g., "$500", "$250,000.00"), percentages ("10%"), or time (e.g., "20 hours", "48 hours waiting period"). "{extra_info}"'
+          - 'Sometimes labeled as "Ret" or "Ded" followed by a "$" amount.'
+          - 'Ignore values belonging to "{invalid_coverage}" or "premium".'
+          - 'Don't extract the amount from these or under these "{invalid_headers}".'
+
+       - "subdeductible and aggregate":
+          - 'Extract labels like ("{sublimits_and_aggregates}", "Each Claim", or "Aggregate") found in the header or near the amount.'
+
+       - "coverage for deductible":
+            - 'Associated description given by LIABILITY "{top_coverage}" etc.'
+            - 'If the document says "Underlying Retention" or "Retained Limit", extract that row here.'
+            - 'For waiting periods, use "Waiting Period" or the specific coverage name (e.g., "Business Interruption").'
+            
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+  rules: 
+     - 'CRITICAL: Values under "Retention" or "Self-Insured Retention" headers MUST be extracted as deductibles.'
+     - 'Treat all time-based values ("hours") as deductible/waiting period values.' 
+     - 'Skip rows containing "{invalid_headers}", "form number", or rows with no valid amount.'
+     - 'If a row has multiple deductible columns (e.g., "Claim" and "Aggregate"), create separate items for each.'
+     - 'If a value is "NOT APPLICABLE", omit the entry entirely.'
+     - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]

@@ -1,0 +1,42 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+what_to_extract:
+  deductible:
+    description: |
+      Extract all deductible-related values present in the document.
+
+      Each object MUST contain:
+
+      - deductible amount:
+          - 'Capture the exact value as written (examples: "$1,000", "100000", "8 Hours", "24 Hour Waiting Period").'
+          - 'Include monetary deductibles, retention values, and time-based waiting periods.'
+          - 'Do NOT normalize, calculate, or modify values.'
+          - 'Exclude "{invalid_headers}" and unrelated numbers.'
+
+      - subdeductible and aggregate:
+          - 'Extract the label or descriptor associated with the deductible (examples: "Each Incident Retention",  "{sublimits_and_aggregates}").'
+          - 'If multiple deductible values exist with different labels, extract each as a separate object.'
+          - 'If no label is present, return an empty string.'
+
+      - coverage for deductible:
+          - 'Extract the full coverage, section title, or endorsement associated with the deductible.'
+          - 'If the deductible appears inline, use that same line as coverage.'
+          - 'Otherwise, use the nearest relevant heading or section title.'
+          - 'Do NOT infer coverage from unrelated sections.'
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+rules:
+  - 'Extract values only when associated with keywords: "Retention", "Deductible", "Waiting Period".'
+  - 'Treat retention values as deductibles.'
+  - 'Treat time-based values as waiting period deductibles.'
+  - 'If a deductible appears inline, use that same line as coverage.'
+  - 'Do NOT extract values from lines containing "Limit", "Aggregate Limit", "Dollar Limit", "Percentage Limit" unless the same line also contains "Retention" or "Waiting Period".'
+  - 'Ignore values that are "Not Applicable".'
+  - 'Do NOT merge multiple deductibles into one object.'
+  - 'Do NOT infer missing labels or coverage.'
+  - 'Do NOT reformat or calculate values.'
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]

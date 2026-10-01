@@ -1,0 +1,40 @@
+field: "limits"
+
+also_appears_as: ["{covered_auto}", "{alternate_limits}", "Stated Limit", "ACV"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt do not hallucinate."
+
+what_to_extract:
+  limits:
+    description: |
+      A list where each item represents data mapped from multi-line vehicle schedule grids and contains:
+
+        - limit amount:
+            - 'POSITIONAL ALIGNMENT RULE: In multi-line stacked grids, values correspond vertically to stacked column headers.
+               For example, if headers are stacked as: 1. Year / 2. Liability Premium / 3. Stated Limit or ACV, you MUST extract the value from the 3rd data row matching that 3rd header (e.g., skip the Year "2003", skip the Premium "6,298", and extract the limit "24,205").'
+            - 'Extract values from "{covered_auto} columns/headers designated as "Stated Limit", "ACV", "Original Cost New", or rows labeled "COST NEW".'
+            - 'Must contain only currency/limit values **with the dollar symbol ($) included exactly as shown if present in the document**.'
+            - 'STRICT EXCLUSION: Never extract the limit amount from columns or lines explicitly representing "Premiums", "Premium", "Deductible", "Ded", or "Year".'
+            - 'Ignore values that belong to "{invalid_coverage}".'
+            - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
+
+        - coverage for limits:
+            - 'Associated description given by "{liability_premium}", "{covered_auto}" and "coverages"."{auto_coverage}"'
+            - 'For vehicle values, combine the vehicle description (Year + Make & Model) and the VIN into this single field. Also "{alternate_limits}"'
+            - 'Format as: "[Year] [Make & Model], VIN: [VIN Number]"'
+            - 'Do not leave this field blank — always pull the description and VIN from the same vehicle block as the limit amount.'
+
+        - line_of_business:
+          - 'Extract the line of business (LOB) for each row.'
+          - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+
+    rules:
+      - 'IMPORTANT: Pay strict attention to multi-line cell layouts where the 1st row is Year, the 2nd row is Premium, and the 3rd row is the Limit amount. "{covered_auto}"", "{liability_premium}"'
+      - 'Skip entries where "{deductible}" or "Ded" is mentioned in the specific limit slot. (e.g., 1000 ded)'
+      - 'Skip rows containing "{invalid_headers}" or with no valid limit amount.'
+      - 'Preserve formatting exactly as shown in the source. "{vin_coverage}", "{auto_coverage}"'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+
+output_fields: ['limit amount', 'coverage for limits', 'line_of_business']

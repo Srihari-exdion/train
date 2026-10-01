@@ -1,0 +1,66 @@
+
+field: 'limits'
+
+also_appears_as: ["{limits}"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context only. Do not extract example text unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all instructions and constraints strictly based on the visible content. Do not infer or hallucinate missing data."
+
+what_to_extract:
+  limits:
+    description: |
+      A list where each item represents a single coverage row from the policy limits section and has:
+
+          - limit amount:
+            - 'Extract only monetary values appearing under a column, heading, or context that represents a Coverage Part Limit of Liability, Limit of Liability, Liability Limit, Each Occurrence Limit, Each Pollution Condition Limit, or equivalent policy liability-limit wording.'
+            - 'The amount must be associated with the coverage row from which it was extracted.'
+            - 'Extract values with or without currency symbols such as "$1,000,000", "USD 1,000,000", or "1000000". Preserve the amount exactly as shown.'
+            - 'If the row contains multiple liability-limit amounts under different limit/aggregate columns, extract each amount separately and associate each with its respective "{sublimits_and_aggregates}" description.'
+            - 'Do not extract monetary values from Deductible, Retention, Coverage Retention, Insured Entity Retention, Retroactive Date, Premium, or other non-limit sections.'
+            - 'Do not extract values from rows or coverage parts marked "NOT COVERED".'
+            - 'Do not extract the Policy Aggregate Limit as a coverage-row limit unless it is explicitly presented as the limit for a specific coverage row.'
+            - 'Do not extract amounts from the deductible section even when the same coverage names and dollar amounts appear there.'
+
+          - sublimits and aggregate:
+              - 'Extract the context describing what each limit amount applies to, such as "each Pollution Condition", "Each Occurrence", "Aggregate", "Coverage Part Aggregate Limit", "Policy Aggregate Limit", or equivalent wording.'
+              - 'For a row containing both a Coverage Part Limit of Liability and a Coverage Part Aggregate Limit, extract the two amounts separately and preserve their respective limit contexts.'
+              - 'Do not combine a liability limit and an aggregate limit into one limit amount.'
+              - 'If the amount is explicitly associated with a qualifier such as "each Pollution Condition", include that qualifier with the corresponding limit.'
+              - 'Only extract aggregate information when an actual monetary amount is associated with that aggregate context.'
+              - 'Do not treat Deductible or Retroactive Date as a sublimit or aggregate.'
+
+          - coverage for limits:
+              - 'Extract the coverage description from the same row as the liability limit amount.'
+              - 'Use the first-column coverage description exactly as shown in the document.'
+              - 'For nested rows, preserve the complete row description including its parent coverage identifier where necessary, for example "A.1. First Party Discovery", "A.2. Third Party Liability", "B.1. First Party Discovery".'
+              - 'Do not use text from the Deductible or Retroactive Date sections as the coverage for limits.'
+              - 'Do not create or infer a coverage description when the document does not provide one.'
+          
+          - line_of_business:
+            - 'Extract the line of business (LOB) for each coverage row.'
+            - 'Identify the Line of Business (LOB) for each row from the referred LOB below.'
+    rules:
+      - 'Extract only limits from the Coverage Part Limit of Liability / liability-limit portion of the document.'
+      - 'If a coverage row contains both a liability limit and a Coverage Part Aggregate Limit, create separate limit entries for the respective amounts and preserve their separate "{sublimits_and_aggregates}" contexts.'
+      - 'For example, if a row contains "$1,000,000 each Pollution Condition" under Coverage Part Limit of Liability and "$1,000,000" under Coverage Part Aggregate Limit, do not combine them into "$1,000,000 each Pollution Condition / $1,000,000 Aggregate". Keep them as separate limit amounts with their respective contexts.'
+      - 'Extract every valid coverage-row liability limit separately, including nested rows such as A.1, A.2, B.1, B.2, D.1, and D.2.'
+      - 'If the same dollar amount appears in multiple coverage rows, extract it separately for each corresponding coverage row.'
+      - 'Do not extract the same amount merely because it appears in another section such as Deductible, Retroactive Date, or Policy Aggregate information.'
+      - 'Skip entries where "deductible", "retention", "coverage retention", "insured entity retention", or "waiting period" is mentioned in the context of the monetary value.'
+      - 'Skip all rows containing "NOT COVERED" because they do not contain a valid provided liability limit.'
+      - 'Skip entries from the Deductible section, including amounts such as "$5,000 each Pollution Condition". These are deductibles, not limits.'
+      - 'Skip dates such as "07/02/2018" because they are Retroactive Dates and are not monetary liability limits.'
+      - 'Skip entries containing "premium", "form number", "form no", "premium values", or other non-limit monetary values.'
+      - 'Do not extract the Policy Aggregate Limit "$1,000,000" at the top of the page as a separate coverage-row limit unless the extraction requirement explicitly treats policy-level aggregate limits as valid standalone limits.'
+      - 'Extract single-line limits as well as limits presented in tables.'
+      - 'Do not infer a limit for a coverage that is marked "NOT COVERED".'
+      - 'Do not infer that an amount in the Deductible or Retroactive Date section is a liability limit simply because the coverage name matches a coverage in the limits section.'
+      - 'Do not leave "coverage for limits" blank when a valid liability limit is present — always pull the corresponding description from the same coverage row.'
+      - 'Preserve formatting exactly as shown in the source, including currency symbols, commas, capitalization, and wording such as "$1,000,000 each Pollution Condition".'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'Each output object in the list must correspond to a single valid coverage-row limit amount from the document.'
+      - 'Follow the document structure and column headings when determining whether an amount is a liability limit, aggregate limit, deductible, or another monetary value. Do not classify an amount as a limit based only on its numeric value.'
+
+output_fields: ['limit amount','sublimits and aggregate','coverage for limits', 'line_of_business']
+

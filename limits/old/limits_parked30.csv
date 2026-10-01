@@ -1,0 +1,31 @@
+﻿file_name,page_num,lob,policy_type,sub_element_name,prompt_name,prompt_output,note
+1018aut202505310536405_CT.PDF,15,Business Auto,MSD,limits,cost_new_limit_with_vin_coverage.yaml,1018aut202505310536405_CT-15.json,
+1018aut202505310536405_CT.PDF,16,Business Auto,MSD,limits,cost_new_limit_with_vin_coverage.yaml,1018aut202505310536405_CT-16.json,
+1018aut202505310536405_CT.PDF,17,Business Auto,MSD,limits,cost_new_limit_with_vin_coverage.yaml,1018aut202505310536405_CT-17.json,
+1018aut202505310536405_CT.PDF,22,Business Auto,MSD,limits,alternate_limits_with_coverage.yaml,1018aut202505310536405_CT-22.json,
+1018aut202505310536405_CT.PDF,76,Business Auto,MSD,limits,sublimits_with_coverage.yaml,1018aut202505310536405_CT-76.json,Validated
+1090csr1202505062125209003_CT.pdf,73,Business Auto,SSD,limits,alternate_limits_with_coverage.yaml,1090csr1202505062125209003_CT-73.json,
+1090csr1202505062125209003_CT.pdf,78,Business Auto,SSD,limits,alternate_limits_with_coverage.yaml,1090csr1202505062125209003_CT-78.json,
+1090csr1202505062125209003_CT.pdf,476,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1090csr1202505062125209003_CT-476.json,Validated
+1090cbl202507312106066004_CT.pdf,52,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1090cbl202507312106066004_CT_52.json,
+1150prp202507292330136001_prp_ct00.pdf,12,Property,SSD,limits,limits_with_coverage.yaml,1150prp202507292330136001_prp_ct00-12.json,
+1150prp202507292330136001_prp_ct00.pdf,47,Property,SSD,limits,limits_with_coverage.yaml,1150prp202507292330136001_prp_ct00-47.json,
+1150prp202507292330136001_prp_ct00.pdf,73,Property,SSD,limits,limits_with_coverage.yaml,1150prp202507292330136001_prp_ct00-73.json,
+1134pkg202507300504134009_pkg_ct00.pdf,9,Package,AR,limits,limits_with_coverage.yaml,1134pkg202507300504134009_pkg_ct00-09.json,
+1134pkg202507300504134009_pkg_ct00.pdf,10,Package,AR,limits,limits_with_coverage.yaml,1134pkg202507300504134009_pkg_ct00-10.json,
+1134pkg202507300504134009_pkg_ct00.pdf,11,Package,AR,limits,limits_with_coverage.yaml,1134pkg202507300504134009_pkg_ct00-11.json,
+1147prp202507312310545_CT.PDF,44,Property,MSD,limits,limits_with_coverage.yaml,1147prp202507312310545_CT-44.json,
+1090csr1202505062125209003_CT.pdf,83,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-83.json,
+1090csr1202505062125209003_CT.pdf,84,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-84.json,
+1090csr1202505062125209003_CT.pdf,89,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-89.json,
+1099cbl202507310954888_CT.pdf,19,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1099cbl202507310954888_CT_limits_19.json,Validated
+1099cbl202507310954888_CT.pdf,20,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1099cbl202507310954888_CT_20.json,Validated
+1666csr115022025071511628_aut_ct00.pdf,21,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1091cbl202507312106066004_CT_52.json,
+1666csr115022025071511628_aut_ct00.pdf,22,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1092cbl202507312106066004_CT_52.json,
+1666csr115022025071511628_aut_pt00.pdf,23,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1093cbl202507312106066004_CT_52.json,
+1666csr115022025071511628_aut_pt00.pdf,24,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1094cbl202507312106066004_CT_52.json,
+1666csr114022025071453007_aut_ct00.pdf,26,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1095cbl202507312106066004_CT_52.json,
+1666csr114022025071453007_aut_pt00.pdf,26,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1096cbl202507312106066004_CT_52.json,
+1090csr1202505062122209001_PT.pdf,11,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1018aut202505310536405_CT-100.json,Changed â€“ Validated
+1090csr1202505062122209001_PT.pdf,14,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-14.json,Validated
+"26-27 CPK ( GL. Prop, Auto, IM, WC, Umb) Quote UFG_QUOTE.pdf",4,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-14.json,newly added

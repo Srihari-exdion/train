@@ -1,0 +1,41 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+        - deductible amount:
+          - 'Must contain only currency values related to policy deductible (examples: "$60,000", "20 hours", "$2,000,000 deductible", "$1,000,000", "5,000").'
+          - 'Don't extract the amount from these or under these "{invalid_headers}", "premium".'
+          - 'Don't extract the amount from premium column.'
+          - 'Extract from deductible, retention, or deductible-related columns and descriptions.'
+          - 'Extract values under coverage-specific deductible columns such as "Limit minus deductible shown below".'
+          - 'If a deductible value appears under a coverage column (eg: Comprehensive, Collision), treat that value as a valid deductible amount.'
+          - 'Do not extract under "Excess of" because under these columns the deductible amount is not valid.'
+          - 'Do not extract values from "Total Premium", premium columns, limits columns, or unit count columns.'
+
+        - coverage for deductible:
+          - 'Associated description given by LIABILITY "{auto_coverage}" etc.'
+          - 'When deductible values appear under coverage column headers, use the coverage header name as the coverage for deductible (eg: Comprehensive, Collision, Specified Causes of Loss).'
+          - 'Extract deductibles which are in description like (eg: "deductible") with amount and separated by this symbol ";".'
+
+        - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+    rules:
+      - 'Produce two entries per row if both have valid deductible amounts (eg: Comp ded and Coll Ded).'
+      - 'Skip rows containing "{invalid_headers}", "form number", "form no" or with no valid deductible amount.'
+      - 'Do not leave "coverage for deductible" blank — always pull the description from the same row or corresponding coverage column header.'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+      - 'Skip cells containing "No Coverage".'
+      - 'Dont extract which are containing "{limits}", "premium" values in row and columns because these are invalid deductible amount.'
+      - 'Extract deductible amounts appearing under coverage-specific deductible headers such as "Limit minus deductible shown below".'
+      - 'If multiple coverage columns contain deductible amounts in the same row, create a separate deductible entry for each coverage.'
+      - 'Dont extract under "Excess of" because under these columns the deductible amount is not valid.'
+      - 'Dont extract values from premium columns even if they appear in the same row as a deductible.'
+
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']

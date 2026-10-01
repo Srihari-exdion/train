@@ -1,0 +1,33 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"]
+what_to_extract:
+  deductible:
+    description: |
+         A list where each item has:
+   
+         - deductible amount:
+            - 'The deductible value (examples: "$500","$250,000.00").' "{extra_info}"
+            - 'Include "Waiting Period" label as (e.g: "4 hours", "1hour").'
+            - 'Ignore values that belong to "{invalid_coverage}" and "{invalid_headers}".'
+            - 'Don't extract the amount from premium.'
+            - 'you will find two waiting periods under the coverages, print multiple waiting periods in deductible amount if you find.'
+             
+   
+         - coverage for deductible:
+            - 'Associated description given by LIABILITY "{coverages}" etc.'
+            - 'Extract the full description from the "{coverages}" column that is on the same row as the deductible amount.'
+            - 'For waiting periods, use "Waiting Period" as the coverage.'
+            - 'if you will find like (eg: "A","B","C","D","E","F"and etc.....) extract every amount under "{deductible}" header tag.'
+
+         - line_of_business:
+           - 'extract the line_of_business(lob) from the page.'   
+            
+         rules: 
+            - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+            - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+            - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+            - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

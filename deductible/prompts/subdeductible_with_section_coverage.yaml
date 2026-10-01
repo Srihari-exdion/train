@@ -1,0 +1,40 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      Extract a list of deductible entries. Each entry must contain:
+
+      - deductible amount:
+         '- Any monetary value, percentage, or time period explicitly representing a deductible.'
+         - 'Examples: "$500", "10%", "$250,000 each claim", "24 hours".'
+         - 'Include waiting period values as deductible amounts.'
+         - 'Do NOT extract values related to "{invalid_headers}" or premiums.'
+
+      - subdeductible and aggregate:
+          - 'If there are two deductible values on the same row (e.g., "{sublimits_and_aggregates}"),combine them into a single string separated by a comma.'
+          - 'Extract the sub-deductible label (e.g., "{sublimits_and_aggregates}") found near the deductible amount.'
+          - 'If multiple deductible values exist on same row with different labels, extract each separately.'   
+
+      - coverage for deductible:
+        - 'Associated description given by "{coverage}" etc.'
+        - 'coverage format will be like :
+           - 'coverage will be left side of the description.'
+           - 'after coverage there will be description header on the top.'
+           - 'under the description header all the deductibles will be there.'
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+rules:
+    - 'Only extract rows where a valid deductible amount or time period exists like (ex:"24 hours").'
+    - 'Ignore rows containing: "{invalid_headers}", "form number", "form no", or premium amounts.'
+    - 'Ignore deductibles tied to invalid or excluded coverages: "{invalid_coverage}".'
+    - 'If a value is "NOT APPLICABLE", omit that entry entirely.'
+    - 'Do not infer or calculate values — extract exactly as written.'
+    - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ['deductible amount', 'subdeductible and aggregate', 'coverage for deductible', 'line_of_business']
+ 

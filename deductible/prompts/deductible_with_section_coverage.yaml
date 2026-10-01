@@ -1,0 +1,34 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      Extract a list of deductible entries. Each entry must contain:
+
+      - deductible amount:
+         '- Any monetary value, percentage, or time period explicitly representing a deductible.'
+         - 'Examples: "$500", "10%", "$250,000 each claim", "24 hours".'
+         - 'Include waiting period values as deductible amounts.'
+         - 'Don't extract the amount from these or under these "{invalid_headers}".'
+         - 'Do NOT extract values related to premiums.'
+
+      - coverage for deductible:
+        - 'Associated description given by "{coverage}" etc.'
+        - 'coverage format will be like :
+           - 'coverage will be left side of the description.'
+           - 'after coverage there will be description header on the top.'
+           - 'under the description header all the deductibles will be there.'
+
+      - line_of_business:
+       - 'extract the line_of_business(lob) from the page.'
+rules:
+    - 'Only extract rows where a valid deductible amount or time period exists.'
+    - 'Ignore rows containing: "{invalid_headers}", "form number", "form no", or premium amounts.'
+    - 'Ignore deductibles tied to invalid or excluded coverages: "{invalid_coverage}".'
+    - 'If a value is "NOT APPLICABLE", omit that entry entirely.'
+    - 'Do not infer or calculate values — extract exactly as written.'
+    - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']

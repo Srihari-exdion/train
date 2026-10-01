@@ -1,0 +1,38 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible value (examples: "$500", "$5,000", "$12,500", "5%", "10%", "20 hours").' "{extra_info}"
+          - 'Extract percentage deductibles (e.g., "5%") and currency deductibles (e.g., "$5,000").'
+          - 'If deductible appears as text like "Deductible: $5,000 Each Occurrence", extract the dollar amount.'
+          - 'If multiple deductible values appear on the same coverage (e.g., Not in Flight 5%, In Flight 5%), extract each separately.'
+          - 'Include time-based values such as waiting periods.'
+          - 'Don't extract the amount from these or under these "{invalid_headers}".'
+          - 'Do not extract the amount from premium or limits.'
+          
+        - coverage for deductible:
+          - 'Associated description given by "{coverage}" etc.'
+          - 'Coverage is usually the text immediately above or to the left of the deductible value.'
+          - 'If deductible appears under a coverage description, use that coverage name.'
+          - 'If deductible appears as a separate line starting with "Deductible:", use the coverage name directly above that line.'
+          - 'If multiple deductible values exist under one coverage, use the same coverage name for all.'
+          - 'Extract the full coverage description associated with the deductible amount.'
+
+        - line_of_business:
+          - 'extract the line_of_business(lob) from the page.'
+
+  rules: 
+     - 'Deductibles may appear as percentages, flat amounts, or written as "Deductible: $X".'
+     - 'If deductible appears below a coverage description, associate it with the nearest coverage above.'
+     - 'If multiple deductible percentages appear (e.g., Not in Flight / In Flight), extract each separately.'
+     - 'Do NOT extract limits, aggregates, or coverage amounts as deductibles.'
+     - 'Skip rows containing "{invalid_headers}", "form number", "form no" or with no valid deductible amount.'
+     - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']

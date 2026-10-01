@@ -1,0 +1,48 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item represents a deductible entry and has:
+
+        - deductible amount:
+          - 'Must contain only deductible-related values such as "$500", "$2,500"," $100,000 Minus" ,"10%", "48 hours".'
+          - 'Extract only values explicitly associated with rows containing the word "Deductible".'
+          - 'Do NOT extract values from rows labeled "Limit Of Insurance" or similar limit-related fields.'
+          - 'If multiple deductible values exist within the same logical section, combine them into a single string separated by a comma.'
+          - 'Include time-based values (e.g., "hours") if present.'
+
+        - subdeductible and aggregate:
+          - 'Extract any descriptive qualifiers associated with the deductible such as "{sublimits_and_aggregates}", etc.'
+          - 'Extract ALL subdeductible which are ends with (e.g., "Each Customer's Auto", "Any One Event") in the description into the subdeductible field.'
+          - 'If multiple deductible values exist with different qualifiers, extract each separately with its corresponding label.'
+          - 'If no qualifier is present, omit this field.'
+
+
+        - coverage for deductible:
+          - 'Extract the "{coverage}" name associated with the deductible (e.g., from the "Coverages" column or section header).'
+          - 'If the deductible appears within a grouped section, assign the parent coverage name to all related deductible entries.'
+          - 'Ensure the coverage reflects the correct context of the deductible row.'
+          - 'These labels are typically part of the same row or immediately adjacent descriptive text.'
+
+        - line_of_business:
+          - 'extract the line_of_business(lob) from the page.'
+
+    rules:
+      - 'Extract only rows where "Deductible" is explicitly mentioned.'
+      - 'Do NOT extract values from "{limits}" rows even if they contain numeric values.'
+      - 'Ignore rows that contain only "$", empty values, or no numeric data.'
+      - 'If a deductible row has no numeric value, skip it.'
+      - 'Handle multi-line table structures where deductible descriptions span multiple lines.'
+      - 'Associate deductible values with the nearest relevant description text.'
+      - 'Skip unrelated sections such as endorsements text, conditions, or schedules without deductible values.'
+      - 'If a key has no value, omit the key entirely (do not return null, "", or NA).'
+      - 'If a value contains "NOT APPLICABLE", omit that entry entirely.'
+      - '**CRITICAL: Extract ALL amounts from "Maximum Deductible", "Deductible For Each Customers" into the deductible field.**'
+      - '**CRITICAL: extract all time-based values ending with "hours", "hour" as deductible values.**'
+      - '**CRITICAL: focus on only under the [[SECTION_BOTTOM_START]] head ignore the information and data in between [[SECTION_TOP_START]] and [[SECTION_TOP_END]].**'
+
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]

@@ -1,0 +1,39 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible or retention value (examples: "$5,000", "$40,000", "$1,000").' "{extra_info}"
+          - 'Extract values from columns labeled "Insured Person Retention" and "Aggregate Retention".'
+          - 'Each row may contain multiple retention values; extract each value separately.'
+          - 'Don't extract the amount from these or under these "{invalid_headers}".'
+          - 'Do not extract the amount from premium or limits.'
+          - 'Consider retention labels such as "Insured Person Retention" and "Aggregate Retention" as deductible values.'
+
+        - coverage for deductible:
+          - 'Associated description given by "{coverage}" etc.'
+          - 'If the deductible/retention is inside a table, use the leftmost column value on the same row as the coverage description.'
+          - 'If there are multiple deductible/retention columns in the same row, combine the row description with the column header to form coverage.'
+          - 'Examples: "$5,000 - Greater than $20,000,000Insured Person Retention".'
+          - 'Always extract the description from the same row as the deductible/retention amount.'
+          - 'Do not use premium, limits, totals, or headers as coverage.'
+        
+        - line_of_business:
+          - 'extract the line_of_business(lob) from the page.'
+
+  rules: 
+     - 'Extract retention values from both Insured Person Retention and Aggregate Retention columns.'
+     - 'Each retention amount should be extracted as a separate entry.'
+     - 'Coverage must include Corporation Assets range and retention type.'
+     - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values".'
+     - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+     - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+     - 'If there are multiple deductible amounts with different coverages extract all with their respective coverage.'
+     - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']

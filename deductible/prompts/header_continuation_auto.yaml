@@ -1,0 +1,39 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}", "DEDUCTIBLE"]
+
+what_to_extract:
+  retention:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The retention or sub-retention value (examples: "$5,000", "$25,000", "$100,000").' "{extra_info}"
+          - 'Include time-based values such as waiting periods (examples: "8 hours", "24 hours").'
+          - 'In between headers and the "$" amounts you may find paragraphs like (eg: "{paragraph_context_header}") ignore and extract vertical align "$" amounts values.'
+          - 'Don't extract the amount from these or under these "{invalid_headers}".'
+          - 'Extract every "$" amount, DO NOT SKIP any "$" amount.'
+
+      - coverage for deductible:
+        - 'Associated description given by LIABILITY "{auto_coverage}".'
+        - 'make sure print deductible amount "{deductible}" + coverage {auto_coverage} with horizontal alignment.'
+
+      - line_of_business:
+        - 'extract the line_of_business(lob) from the page.'
+
+  rules:
+    - 'CRITICAL: Extract values when keywords appear: "{deductible}" these are deductibles**.'
+    - 'Only extract values from the Retention / Sub-Retention column.'
+    - 'Do NOT extract values from Limit / Sub-Limit column.'
+    - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+    - 'Ignore Summary of Charges section completely.'
+    - 'Ignore Premium, Taxes, Fees, Total.'
+    - 'If waiting period exists without a dollar retention, still extract the waiting period as deductible.'
+    - 'Skip rows where retention value is "N/A" or blank.'
+    - 'Do NOT confuse limits as retention.'
+    - 'Do NOT leave this field blank.'
+    - 'Extract every "$" amount, DO NOT SKIP any "$" amount.'
+    - 'dont extract which are containing "Endorsement" like (eg: "SSPN-018 07 23 -- Notice To Texas Policy Holder", "PR 037 (02/12)-- Leasehold Interest Endorsement").'
+
+
+output_fields: ['deductible amount',  'coverage for deductible', 'line_of_business']

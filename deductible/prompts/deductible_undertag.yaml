@@ -1,0 +1,35 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}", "Self-Insured Retention", "Retention", "Waiting Period"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item captures a deductible or retention value and its specific coverage.
+
+       - "deductible amount":
+          - 'Extract values from columns labeled "Self-Insured Retention", "Retention", or "{deductible}".'
+          - 'The value can be currency (e.g., "$100,000") or time-based (e.g., "8 Hours"). "{extra_info}"'
+          - 'For "Waiting Periods," extract the specific time duration mentioned in the description or amount column.'
+          - 'Don't extract the amount from these or under these "{invalid_headers}".'
+      
+       - "coverage for deductible":
+          - 'Associated description from the "Coverages" or "{top_coverage}" columns.'
+          - 'Crucial: If a coverage has sub-items (e.g., I, II, III), combine the parent header with the sub-item text.'
+          - 'Example: "Business Interruption Coverage - Network Security Breach".'
+          - 'For waiting periods, include the full name of the specific coverage it applies to (e.g., "Business Interruption Waiting Period").'
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+  rules: 
+     - 'Scan tables for columns labeled "Self-Insured Retention" or "Retention" and treat them as deductibles.'
+     - 'Extract all time-based values (hours, hour) and treat them as deductible amounts.'
+     - 'If multiple coverages share the same retention value in a table, create a separate entry for each row.'
+     - 'Skip rows containing "{invalid_headers}" and "forms" or with no valid deductible amount.'
+     - 'Do not leave "coverage for deductible" blank — ensure it identifies exactly what the amount applies to.'
+     - 'Preserve formatting exactly (e.g., "$100,000", "8 Hours").'
+     - 'If a value is "NOT APPLICABLE" or "N/A", omit the entry entirely.'
+     - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

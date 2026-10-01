@@ -1,0 +1,18 @@
+﻿file_name,page_num,lob,policy_type,sub_element_name,prompt_name,prompt_output,note
+cmerged_01.pdf,1,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1090csr1202505062125209003_CT-476.json,
+cmerged_01.pdf,2,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1090csr1202505062125209003_CT-476.json,
+1090csr1202505062125209003_CT.pdf,73,Business Auto,SSD,limits,alternate_limits_with_coverage.yaml,1090csr1202505062125209003_CT-73.json,
+1150prp202507292330136001_prp_ct00.pdf,73,Property,SSD,limits,limits_with_coverage.yaml,1150prp202507292330136001_prp_ct00-73.json,
+1666csr115022025071511628_aut_pt00.pdf,24,Business Auto,SSD,limits,new_cost_new_prompt_with_limit.yaml,1094cbl202507312106066004_CT_52.json,Validated
+1666csr114022025071453007_aut_ct00.pdf,26,Business Auto,SSD,limits,new_cost_new_prompt_with_limit.yaml,1095cbl202507312106066004_CT_52.json,
+1666csr114022025071453007_aut_pt00.pdf,26,Business Auto,SSD,limits,new_cost_new_prompt_with_limit.yaml,1096cbl202507312106066004_CT_52.json,
+1090csr1202505062122209001_PT.pdf,11,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1018aut202505310536405_CT-100.json,
+1014oml20260227071813279_oml_ct00.pdf,12,Business Auto,SSD,limits,limits_with_description.yaml,1018aut202505310536405_CT-100.json,
+25-26 BLD (1781 Colter Lake) - Hanover Quote_QUOTE.pdf,2,Business Auto,SSD,limits,limits_with_multiple_coverages.yaml,1019aut202505310536405_CT-100.json,
+1666prd20260304054721161_prd_ct00.pdf,15,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1019aut202505310536405_CT-100.json,
+1090pol1202602242120000022_pol_ct00.pdf,33,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1019aut202505310536405_CT-100.json,
+1151aut20260109060935486_aut_ct00.pdf,6,Business Auto,SSD,limits,cost_new_with_vin_only.yaml,1019aut202505310536405_CT-100.json,
+1151aut20260109060935486_aut_ct00.pdf,7,Business Auto,SSD,limits,cost_new_with_vin_only.yaml,1019aut202505310536405_CT-100.json,
+1003umb20260317100336114_umb_ct00.pdf,7,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1019aut202505310536405_CT-100.json,
+1006aut20260109065121736_aut_ct00.pdf,79,Business Auto,SSD,limits,new_cost_new_prompt_with_limit.yaml,1019aut202505310536405_CT-100.json,
+1006aut20260109065121736_aut_ct00.pdf,80,Business Auto,SSD,limits,new_cost_new_prompt_with_limit.yaml,1019aut202505310536405_CT-100.json,

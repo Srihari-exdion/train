@@ -1,0 +1,47 @@
+field: 'limits'
+
+also_appears_as: ["{limits}"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt do not hallucinate."
+
+what_to_extract:
+  limits:
+    description: |
+      A list where each item represents a single row of coverage and has:
+
+        - limit amount:
+            - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "$2,010,000 Aggregate", "$1,010,000 Each Occurrence"). "{extra_info}"'
+            - 'Ignore values that belong to "{invalid_coverage}".'
+            - 'Combine all valid currency limits from the "{sublimits_and_aggregates}" columns on the same line into a single comma-separated string.'
+            - 'Must contain only currency values **with the dollar symbol ($) included exactly as shown in the document**.'
+            - 'Do not extract the amount from premium'
+            - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
+            - '"Retained Limits" is Deductible, so do not extract any "Retained Limits" amount or coverage'
+
+        - sublimits and aggregate:
+            - '(example: "each claim", "aggregate", "including")'
+            - 'Combine the labels "{sublimits_and_aggregates}" from the column headers into one comma-separated string.'
+
+        - coverage for limits:
+            - 'Associated description given by "Section" etc.'
+            - 'This value is the description from the first column of the row.'
+
+        - line_of_business:
+          - 'Extract the line of business (LOB) for each row.'
+          - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+
+    rules:
+      - '"Retained Limits" is Deductible, so do not extract any "Retained Limits" amount or coverage'
+      - 'Extract single line limits as well which are not in tabular format'
+      - 'Skip entries where "deductible", "retention", "coverage retention", "insured entity retention", or "waiting period" is mentioned.'
+      - 'Skip rows containing "premium", "form number", "form no", "premium values" or with no valid limit amount.'
+      - 'Do not leave "coverage for limits" blank — always pull the description from the same row as the limit.'
+      - 'Preserve formatting exactly as shown in the source
+        (e.g., "$250k defense sublimit", "$250K sublimit non-monetary defense").'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'Each output object in the list must correspond to a single row of coverage from the document, combining all relevant data points from that row.'
+
+output_fields: ['limit amount','sublimits and aggregate','coverage for limits', 'line_of_business']
+ 

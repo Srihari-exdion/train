@@ -1,0 +1,42 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible or retention value written in the document (examples: "$2,500", "20 hours", "10%", "$250,000.00", "$250,000.00 US").' "{extra_info}"
+          - 'extract secandary $ amount value under the Retentions column (eg: "$1,000,000" followed by "$2,500" for the same coverage and combined headers → extract "$2,500" only this belongs to retentions).'
+          - '**CRITICAL: In Retentions tables, deductible values may appear on the line immediately below a coverage limit. When "$1,000,000" is followed by "$2,500" for the same coverage block, treat "$2,500" as the deductible even if it appears on the next line.**'
+          - 'Extract waiting period values ending with "hour" or "hours" (examples: "8 hours", "24 hours", "48 hours").'
+          - 'Treat Waiting Period values as deductible amounts.'
+          - 'Ignore premium amounts.'
+
+      - coverage for deductible:
+          - 'Associated description given by "{coverage}" etc.'
+          - 'Extract the full coverage description from the same row as the deductible amount.'
+          - 'Do not shorten, summarize, or modify the coverage description.'
+          - 'If the deductible is a Waiting Period value, use the associated waiting period description as the coverage.'
+
+      - line_of_business:
+        - 'extract the line_of_business(lob) from the page.'
+
+rules:
+  - 'Treat values under columns named "Retention", "Retentions", "Deductible", "Deductibles", "SIR", or "Self Insured Retention" as deductible amounts.'
+  - 'Always pair the deductible amount with the coverage description from the same row.'
+  - 'If two monetary values appear for the same coverage and the second value is deductible/retention, extract the second value as the valid deductible.'
+  - 'Ignore rows containing "Limit", "Limits", "Sub-Limits of Insurance", "Aggregate Limit", "Occurrence Limit", or similar limit terminology.'
+  - 'Ignore values associated with "Included".'
+  - 'Ignore rows where only a coverage limit is present and no deductible/retention exists.'
+  - 'Extract all valid time-based values ending with "hour" or "hours" only.'
+  - '**CRITICAL: When the header contains "Retentions", treat values in that section as deductible values.**'
+  - '**CRITICAL: In Retentions tables, deductible values may appear on the line immediately below a coverage limit. When "$1,000,000" is followed by "$2,500" for the same coverage block, treat "$2,500" as the deductible even if it appears on the next line.**'
+  - '**CRITICAL: For entries such as "System Failure Waiting Period - 8 hours", extract "8 hours" as the deductible amount.**'
+  - '**CRITICAL: Do not extract values from rows containing the word "Limit" unless the row also contains a valid waiting period value.**'
+  - '**CRITICAL: Coverage, limit, and deductible values may be vertically stacked. Associate the deductible with the nearest preceding coverage description within the same coverage block.**'
+  - '**CRITICAL: Do not require the deductible value to appear on the exact same text row as the coverage description. Use table structure and proximity.**'
+
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']

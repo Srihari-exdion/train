@@ -1,0 +1,39 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"] 
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible or retention value written in the document (examples: "$500", "20 hours", "10%", "$250,000.00", "$250,000.00 US").' "{extra_info}"
+          - 'Include Waiting Period values (e.g.,  "48 hours", "8 Hours") in the same field.'
+          - 'Extract retention values when shown in a "Retention" column or next to coverage rows.'
+          - 'Ignore values that belong to "{invalid_coverage}".'
+          - 'Do not extract "{limits}" or premium amounts.'
+          - 'Do not extract the amount from premium.'
+
+       - coverage for deductible:
+            - 'Associated description given by "{top_coverage}" or the coverage name in the same row as the deductible.'
+            - 'For waiting periods, use "Waiting Period" as the coverage.'
+            - 'If you see text like "Retention:" or "Deductible:" near a value, extract that value as deductible.'
+            - 'If multiple "{deductible}" values exist for different coverages, extract each coverage with its corresponding deductible separately.'
+            - 'Always take the coverage name from the same row or line as the deductible value.'
+
+       - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+  rules: 
+     - '**CRITICAL: Extract all $ amount values when keywords appear: "{deductible}" these are deductibles**.'
+     - 'Extract all time based values ending with "hours", "hour". These must always be treated as deductible values.'
+     - 'Waiting period values must always have coverage set to "Waiting Period".'
+     - 'dont extract which are containing "{limits}" "Coverage Sublimits" values in row and columns because these are invalid deductible amount and coverage.'
+     - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+     - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+     - 'If a table has a "Retention" column, extract the values from that column as deductible for each coverage row.'
+     - 'Skip rows containing "{invalid_headers}", "form number", "form no" or with no valid deductible amount.'
+
+     
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

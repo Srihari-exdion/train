@@ -1,0 +1,45 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      Extract deductibles as a list of objects.
+
+      Each object MUST contain:
+
+      - deductible amount:
+         - 'Exact value as written (examples: "$1,000", "$5,000", "24 hours").'
+         - 'Include "Waiting Period" values (e.g., "48hours", "24 hours").'
+         - 'Include waiting periods as deductible amounts.'
+         - 'Must NOT include premium values.'
+         - 'Ignore address-related numbers.'
+
+      - coverage for deductible:
+         - 'The FULL "{top_coverage}"" from the description associated with the deductible.'
+         - 'waiting periods will be in description extract the waiting periods.'
+         - 'Coverage lines usually:
+            - 'contain the word "Coverage" in the end of sentences.'
+            - 'description about deductible.'
+            - 'and then deductible - $ with amount.'
+        - Extract the time value exactly as written (examples: "24 Hour Waiting Period", "72 hours waiting period")
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+rules:
+  - 'Coverage is the CLOSEST preceding line that describes a coverage section.'
+  - 'If multiple description lines appear above the deductible,choose thats ends with word coverage in the description.'
+  - 'If the deductible appears inline with text, use that same line as coverage.'
+  - 'If the deductible is time-based only in description = "hour Waiting Period".'
+  - 'Skip rows containing "{invalid_headers}", "form number", "form no" or with no valid deductible amount.'
+  - 'Skip if value is "Not Applicable".'
+  - 'Do NOT infer coverage from other sections of the document.'
+  - 'Do NOT merge multiple deductibles into one object.'
+  - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+
+
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

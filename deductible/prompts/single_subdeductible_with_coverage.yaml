@@ -1,0 +1,42 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+
+  deductible:
+
+    description: |
+      A list where each item represents a single deductible entry and has:
+
+        - deductible amount:
+          - 'Must contain only currency values related to policy deductible (examples: "$500", "20 hours", "10%", "$250,000.00 each Claim").'
+          - 'If there are two deductible values on the same row "{sublimits_and_aggregates}", combine them into a single string separated by a comma.'
+          - 'Don't extract the amount from premium'.
+          - 'consider as retention (e.g., "EACH CLAIM RETENTION", "Agreement A Retention: $10,000") if you find.'
+
+        - subdeductible and aggregate:
+          - 'Extract the sub-deductible label "{sublimits_and_aggregates}" found on the same row as the deductible amount.'
+
+        - coverage for deductible:
+          - 'Extract the full description from the "{coverage}" column that is on the same row as the deductible amount.'
+          - 'sometimes you will find two different in "{coverage}" extract every $ amount from two different coverages.'
+
+        - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+    rules:
+      - 'Only extract data from rows that have a numerical deductible amount.'
+      - 'Do not extract anything from rows that contain only a dollar sign ($) or no numerical value.'
+      - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'If a key has "NOT APPLICABLE" in the value, omit the key entirely (do not return null or "").'
+      - 'dont print subdeductible amount in deductible amount.'
+      - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]
+
+
+
+
+ 

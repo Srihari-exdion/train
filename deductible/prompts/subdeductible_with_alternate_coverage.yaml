@@ -1,0 +1,32 @@
+field: "deductible"
+ 
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+
+  deductible:
+      description: |
+        A list where each item represents a single deductible entry and has:
+
+          - deductible amount:
+              - 'Must contain only currency values related to policy deductible (examples: "$500", "20 hours", "10%", "$250,000.00 each Claim").'
+              - 'Ignore values that belong to "{invalid_coverage}".'
+              - 'Don't extract the amount from premium'.
+
+          - subdeductible and aggregate:
+              - 'Extract the sub-deductible label (e.g: "{sublimits_and_aggregates}") found on the same row as the deductible amount.'
+
+          - coverage for deductible:
+              - 'associated description given by "{alternate_coverage}" etc'
+              
+        - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+      rules:
+      - 'Only extract data from rows that have a numerical deductible amount.'
+      - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'If the entire entry for deductible, deductible amount, or retention amount is "{ded_exclude}", do not return it in the output.'
+      - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]        

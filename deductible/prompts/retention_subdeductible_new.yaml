@@ -1,0 +1,53 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}", "Retention", "Retention Amount", "Waiting Period"]
+
+what_to_extract:
+  retention:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'Extract the deductible/retention value exactly as written (examples: "$100,000", "$25,000", "$250,000 each Claim", "each incident $2,500", "each claim $2,500", "each loss $2,500").' "{extra_info}"
+          - 'Treat every value appearing under a "Retention" column as a deductible.'
+          - 'Include time-based deductibles such as waiting periods (examples: "8 Hours", "1 Hour", "48 Hours").'
+          - 'Extract values only from Retention/Deductible columns or rows explicitly mentioning Retention or Deductible.'
+          - 'Ignore premium-related values.'
+          - 'Paragraphs or explanatory text (eg: "{paragraph_context_header}") may appear between the Retention header and the values. Ignore the paragraph and continue extracting the vertically aligned retention values.'
+          - 'If a table contains both a Limit column and a Retention column, the rightmost monetary column is the "{deductible}" column. Extract only values from this vertically aligned column.'
+          - 'If there are multiple amounts in same row but different column and there will be a  gap in between two $ amounts and $ amount and its vertically aligned to retention headers extract that in to deductible.'
+          - 'The following values are deductible values whenever they appear under the Retention column: "$2,500", "each incident $2,500", "each claim $2,500", "each loss $2,500".'
+          - 'If there are two deductible values on the same row (e.g., "{sublimits_and_aggregates}"),combine them into a single string separated by a comma.'
+
+      - subdeductible and aggregate:
+          - 'Extract the sub-deductible label (e.g., "{sublimits_and_aggregates}") found near the deductible amount.'
+          - '"{sublimits_and_aggregates}" will be beside of the deductible amount even there is huge gap between amount and sublimits_and_aggregates.'
+          - 'If same amount repeated, extract each separately with respective "{sublimits_and_aggregates}".'
+          - 'If multiple deductible values exist on same row with different labels, extract each separately.'
+
+
+
+      - coverage for deductible:
+          - 'Extract the coverage associated with the deductible. Coverage is usually the first column in the table "{top_coverage}".'
+          - 'For Waiting Period deductibles, use the related coverage name.'
+          - 'If there are multiple $ amounts in same row but different column and there will be a huge gap in between header and $ amount and its vertically aligned to retention headers(example: "$ 2,500") extract that in to deductible.'
+          - 'The following values are deductible values whenever they appear under the Retention column: "$2,500", "each incident $2,500", "each claim $2,500", "each loss $2,500".'
+
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+rules:
+      - 'Treat "Retention" as equivalent to "Deductible".'
+      - 'Every monetary value under the Retention column is a deductible and must be extracted.'
+      - 'If a table contains both "Limit" and "Retention" columns, NEVER extract values from the Limit column. ALWAYS extract values from the Retention column.'
+      - 'If there are two $ monetary columns in a row, the left $ monetary column is the Limit and the right $ monetary column is the retention. Always extract the rightmost monetary value as the deductible.'
+      - 'If the Retention values are written as "each incident $2,500", "each claim $2,500", or "each loss $2,500", extract the entire text exactly as written.'
+      - 'Extract every row under the Retention column. Do not stop after the first row.'
+      - 'If the same deductible value (for example, "each incident $2,500") appears for multiple coverages, return one entry for every coverage.'
+      - 'Ignore paragraphs between the Retention header and the values. Continue extracting all vertically aligned values beneath the Retention header.'
+      - 'The following values are deductible values whenever they appear under the Retention column: "$2,500", "each incident $2,500", "each claim $2,500", "each loss $2,500".'
+      - 'Do NOT extract "$1,000,000", "$250,000", "$50,000", or any value appearing under the Limit column as deductible.'
+
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]
+

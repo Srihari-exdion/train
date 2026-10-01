@@ -1,0 +1,49 @@
+
+field: 'deductible'
+
+also_appears_as: ["deductible", "retention", "{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible value (examples: "20,000" "$500", "20 hours", **"10%"**, **"5% Hurr Cal"**, "5% subject to a $ 1000 minimum", "$250,000.00", "5% Subj. to $5,000 min", "$1,000 deductible", "$100,000 Minus").' "{extra_info}"
+          - 'Include "Waiting Period" values (e.g., "48hours", "24 hours") in the same field. ' 
+          - '**CRITICAL: - Treat the entire "Excess of" column as invalid deductible data.'
+          - 'Don't extract the amount from premium'.
+          - Do not extract any row whose amount comes from the "Excess of" column.
+          - The column header "Excess of" NEVER represents a deductible, retention, waiting period, or deductible amount.
+          - 'consider as retention (e.g., "EACH CLAIM RETENTION", "Agreement A Retention: $10,000") if you find.'
+
+        - coverage for deductible:
+          - 'Associated description given by "{coverage}" etc.'
+          - 'For waiting periods, use "Waiting Period" as the coverage.'
+          - **'Extract the full description from the "Coverage" column that is on the same row as the deductible amount.'**
+          - Every value appearing under the "Excess of" column MUST be ignored.
+          - 'extract data from rows that have a numerical deductible amount or valid time period only which are ends with "hour", "hours" (e.g., "24 hours").'
+          - '**CRITICAL: - Treat the entire "Excess of" column as invalid deductible data.'
+
+        - line_of_business:
+          - 'extract the line_of_business(lob) from the page.'
+
+  rules: 
+     - The column header "Excess of" NEVER represents a deductible, retention, waiting period, or deductible amount.
+     - '**CRITICAL: - Treat the entire "Excess of" column as invalid deductible data.'
+     - 'Skip rows containing "{invalid_headers}", "form number", "form no" these are invalid deductible amount.'
+     - 'Ignore related to "{invalid_coverage}" these are invalid deductible coverages.'
+     - Every value appearing under the "Excess of" column MUST be ignored.
+     - Do not extract any row whose amount comes from the "Excess of" column.
+     - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+     - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+     - 'If there are multiple deductible amounts with different coverages extract all with their respective coverage.'
+     - 'Extract data from rows that have a time period only with the unit "hours" or "hour" (e.g., "72 hours").'
+     - 'extract all time based values ending with "hours", "hour". These must always be treated as deductible values.' 
+     - '**CRITICAL: Extract values when keywords appear: "{deductible}" these are deductibles**.'
+     - '**CRITICAL: Dont extract values which are unders or belongs to these "{invalid_headers}, "{invalid_coverage}"**.'
+     - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+     - 'dont extract under this "Excess of" header because these are invalid deductible amount.'
+     - Treat the entire "Excess of" column as invalid deductible data.
+ 
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']

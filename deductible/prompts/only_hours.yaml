@@ -1,0 +1,32 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"]
+what_to_extract:
+  deductible:
+    description: |
+         A list where each item has:
+   
+         - deductible amount:
+            - 'The deductible value (examples: "$500","$250,000.00").' "{extra_info}"
+            - 'Include "hours" label as (e.g:  "4 hours", "1hour").'
+            - 'Ignore values that belong to "{invalid_coverage}".'
+            - 'Don't extract the amount from premium.'
+            - 'extract all time-based numbers (examples:  "4 hours", "1 hour") all these belongs to deductibles.'
+             
+   
+         - coverage for deductible:
+            - 'Associated description given by "{coverages}" etc.'
+            - 'extract all coverage that horizontally aligns with the "hours", "days", "weeks", etc.'
+
+         - line_of_business:
+           - 'extract the line_of_business(lob) from the page.'
+            
+         rules: 
+            - '**CRITICAL: extract all time based things which are ends with "hours", "hour" are deductible.**'
+            - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+            - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+            - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+            - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

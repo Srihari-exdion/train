@@ -1,0 +1,29 @@
+field: "deductible"
+
+also_appears_as: ["{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+        - deductible amount:
+            - 'Must contain only currency values related to policy deductible.'
+            - 'If there are two deductible values (e.g., "{sublimits_and_aggregates}"), combine them into a single string separated by a comma (e.g., "10%, 10%").'
+            - 'Ignore placeholders like "{ded_exclude}".'
+            - 'Don't extract the amount from premium'.
+
+        - sublimits and aggregate:
+            - 'Always extract the column header labels for deductibles (e.g., "{sublimits_and_aggregates}") and return as a comma-separated string.'
+
+        - coverage for deductible:
+            - 'Extract directly from the "{auto_coverage}" column of the same row.'
+
+    rules:
+      - 'Skip rows containing "premium", "form number", "form no", "premium values" or with no valid deductible amount.'
+      - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+
+
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible"]        

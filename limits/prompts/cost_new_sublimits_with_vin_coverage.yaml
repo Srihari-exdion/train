@@ -1,0 +1,50 @@
+
+field: "limits"
+
+also_appears_as: ["{alternate_limits}"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt do not hallucinate."
+
+what_to_extract:
+  limits:
+    description: |
+      A list where each item has:
+
+        - "limit amount":
+          - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "origin cost new $60,100", "$2,010,000 Limit", "$1,010,000 cost new"). "{extra_info}"'
+          - 'In some cases there will be purchased original cost (example: "46,315 ACV")  '
+          - 'Ignore values that belong to "{invalid_coverage}".'
+          - 'Extract limit amount from both "{alternate_limits}" as well as "limits"'
+          - 'If multiple valid limits appear in the same row, combine them into a single string, comma-separated.'
+          - 'Do not extract the limit amount from "Premiums", "Deductible" or "Ded" column'
+          - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
+
+        - sublimits and aggregate:
+            - '(example: "per day", "each", "Actual Cash Value")'
+            - 'Combine the labels "{sublimits_and_aggregates}" from limit amount into one comma-separated string.'
+            - 'If same amount repeated, extract each separately with respective "{sublimits_and_aggregates}" limit'
+
+        - "coverage for limits":
+          - 'Associated description given by "{vin_coverage}" and "coverages"'
+          - 'Assign "{alternate_limits}" to "{vin_coverage}"'
+          - 'Examples: "VIN: 123ABC8576888", etc.'
+          - 'Add VEHICLE IDENTIFICATION NUMBER (VIN) as description.'
+
+        - line_of_business:
+          - 'Extract the line of business (LOB) for each row.'
+          - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+
+    rules:
+      - 'Extract single line limits as well which are not in tabular format'
+      - 'Skip entries where "{deductible}" is mentioned.'
+      - 'Skip rows containing "{invalid_headers}" or with no valid limit amount.'
+      - 'Do not leave "coverage for limits" blank — always pull the description from the same row as the limit.'
+      - 'Preserve formatting exactly as shown in the source 
+        (e.g., "$60,000 Origin Cost New", "VIN 123ABC8576888").'
+      - 'If a key has no value, omit the key entirely (do not return null or "").'
+
+
+output_fields: ['limit amount', 'sublimits and aggregate', 'coverage for limits', 'line_of_business']
+

@@ -1,0 +1,41 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}", "Retention"]
+
+what_to_extract:
+  retention:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The retention/deductible value (examples: "$100,000", "$25,000", "$250,000 each Claim", "each incident $ 2,500").'  "{extra_info}" 
+          - 'Include time-based values such as waiting periods (examples: "8 Hours", "1 Hour", "48 hours").'
+          - 'Extract retention values only from columns labeled "Each Claim Retention", "Each Cyber Incident Retention", or rows mentioning Retention/Deductible.'
+          - 'Do NOT extract values from the "Limit", "Aggregate", or "Sub-Limit" columns.'
+          - 'Ignore premium-related values.'
+          - 'In between headers and the "$" amounts you may find paragraphs like (eg: "{paragraph_context_header}") ignore and extract vertical align "$" amounts values.'
+          
+      - subdeductible and aggregate:
+        - 'Extract the retention column header or sub-label associated with the retention amount (examples: "Each Cyber Incident Retention", "Each Claim Retention", "{sublimits_and_aggregates}").'
+        - 'If the value corresponds to a Waiting Period, use "Waiting Period" as the sub deductible.'
+        - 'If multiple retention types exist for different coverages, extract each coverage with its corresponding retention separately.'
+
+
+      - coverage for deductible:
+        - 'Coverage is usually the first column in the table "{coverage}".'
+        - 'For waiting periods, use the related coverage name (Waiting Period) as coverage.'
+          
+      - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+
+  rules:
+    - 'Do NOT extract the deductible amount from Limits or Aggregate columns.'
+    - 'Only extract data from Retention columns or rows that contain retention or waiting period values.'
+    - 'If a row contains both retention and waiting period, combine them into one deductible amount separated by comma.'
+    - 'Skip rows where retention value is "N/A" or "Not Applicable".'
+    - 'Do NOT confuse limits as retention even if values look similar.'
+    - 'Do NOT leave this field blank.'
+    - 'Skip rows containing "{invalid_headers}", "form number", "form no" or with no valid deductible amount.'
+    - 'Do NOT extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+
+output_fields: ['deductible amount', 'subdeductible and aggregate', 'coverage for deductible', 'line_of_business']

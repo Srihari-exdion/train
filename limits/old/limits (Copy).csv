@@ -1,0 +1,112 @@
+﻿file_name,page_num,lob,policy_type,sub_element_name,prompt_name,prompt_output,note
+1090boi202507311215013005_CT.pdf,17,Boiler & Machinery,MSD,limits,limits_with_coverage.yaml,1090boi202507311215013005_CT_17.json,master prompt (basic)
+1138ilm202507291909089_CT.pdf,13,Inland Marine,SSD,limits,alternate_limits_with_auto_coverage.yaml,1138ilm202507291909089_CT_13.json,"master prompt (basic) â€“ added â€œinsured valueâ€  limits amount header | added ""make & model"" in coverage"
+1018aut202505310536405_CT.PDF,22,Business Auto,MSD,limits,alternate_limits_with_coverage.yaml,1018aut202505310536405_CT_limit_22.json,
+1142cbl202507311639099_CT.pdf,4,Cyber Liability,MSD,limits,limits_with_coverage.yaml,1142cbl202507311639099_CT_4.json,master prompt (basic)
+1090cbl202507312106066004_CT.pdf,48,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1090cbl202507312106066004_CT_48.json,Validated
+1090cbl202507312106066004_CT.pdf,3,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1090cbl202507312106066004_CT_3.json,Validated
+1090cbl202507312106066004_CT.pdf,2,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1090cbl202507312106066004_CT_2.json,Validated
+1138ilm202507291909089_CT.pdf,61,Inland Marine,SSD,limits,alternate_limits_with_auto_coverage.yaml,1138ilm202507291909089_CT_61.json,"master prompt (basic) â€“ added â€œinsured valueâ€  limits amount header | added ""make & model"" in coverage"
+1138ilm202507291909089_CT.pdf,58,Inland Marine,SSD,limits,alternate_limits_with_auto_coverage.yaml,1138ilm202507291909089_CT_58.json,"master prompt (basic) â€“ added â€œinsured valueâ€  limits amount header | added ""make & model"" in coverage"
+1090boi202507311215013005_CT.pdf,16,Boiler & Machinery,MSD,limits,limits_with_coverage.yaml,1090boi202507311215013005_CT_16.json,master prompt (basic)
+1018aut202505310536405_CT.PDF,15,Business Auto,MSD,limits,cost_new_limit_with_vin_coverage.yaml,1018aut202505310536405_CT-15.json,
+1018aut202505310536405_CT.PDF,16,Business Auto,MSD,limits,cost_new_limit_with_vin_coverage.yaml,1018aut202505310536405_CT-16.json,
+1018aut202505310536405_CT.PDF,17,Business Auto,MSD,limits,cost_new_limit_with_vin_coverage.yaml,1018aut202505310536405_CT-17.json,
+1018aut202505310536405_CT.PDF,22,Business Auto,MSD,limits,alternate_limits_with_coverage.yaml,1018aut202505310536405_CT-22.json,
+1018aut202505310536405_CT.PDF,76,Business Auto,MSD,limits,sublimits_with_coverage.yaml,1018aut202505310536405_CT-76.json,Validated
+1090csr1202505062125209003_CT.pdf,73,Business Auto,SSD,limits,alternate_limits_with_coverage.yaml,1090csr1202505062125209003_CT-73.json,
+1090csr1202505062125209003_CT.pdf,78,Business Auto,SSD,limits,alternate_limits_with_coverage.yaml,1090csr1202505062125209003_CT-78.json,
+1090csr1202505062125209003_CT.pdf,476,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1090csr1202505062125209003_CT-476.json,Validated
+1090cbl202507312106066004_CT.pdf,52,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1090cbl202507312106066004_CT_52.json,
+1150prp202507292330136001_prp_ct00.pdf,12,Property,SSD,limits,limits_with_coverage.yaml,1150prp202507292330136001_prp_ct00-12.json,
+1150prp202507292330136001_prp_ct00.pdf,47,Property,SSD,limits,limits_with_coverage.yaml,1150prp202507292330136001_prp_ct00-47.json,
+1150prp202507292330136001_prp_ct00.pdf,73,Property,SSD,limits,limits_with_coverage.yaml,1150prp202507292330136001_prp_ct00-73.json,
+1134pkg202507300504134009_pkg_ct00.pdf,9,Package,AR,limits,limits_with_coverage.yaml,1134pkg202507300504134009_pkg_ct00-09.json,
+1134pkg202507300504134009_pkg_ct00.pdf,10,Package,AR,limits,limits_with_coverage.yaml,1134pkg202507300504134009_pkg_ct00-10.json,
+1134pkg202507300504134009_pkg_ct00.pdf,11,Package,AR,limits,limits_with_coverage.yaml,1134pkg202507300504134009_pkg_ct00-11.json,
+1147prp202507312310545_CT.PDF,44,Property,MSD,limits,limits_with_coverage.yaml,1147prp202507312310545_CT-44.json,
+1090csr1202505062125209003_CT.pdf,83,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-83.json,
+1090csr1202505062125209003_CT.pdf,84,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-84.json,
+1090csr1202505062125209003_CT.pdf,89,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-89.json,
+1099cbl202507310954888_CT.pdf,19,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1099cbl202507310954888_CT_limits_19.json,Validated
+1099cbl202507310954888_CT.pdf,20,Cyber Liability,MSD,limits,sublimits_with_coverage.yaml,1099cbl202507310954888_CT_20.json,Validated
+1666csr115022025071511628_aut_ct00.pdf,21,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1091cbl202507312106066004_CT_52.json,
+1666csr115022025071511628_aut_ct00.pdf,22,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1092cbl202507312106066004_CT_52.json,
+1666csr115022025071511628_aut_pt00.pdf,23,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1093cbl202507312106066004_CT_52.json,
+1666csr115022025071511628_aut_pt00.pdf,24,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1094cbl202507312106066004_CT_52.json,
+1666csr114022025071453007_aut_ct00.pdf,26,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1095cbl202507312106066004_CT_52.json,
+1666csr114022025071453007_aut_pt00.pdf,26,Business Auto,SSD,limits,cost_new_limit_with_vin_coverage.yaml,1096cbl202507312106066004_CT_52.json,
+1090csr1202505062122209001_PT.pdf,11,Business Auto,SSD,limits,sublimits_with_coverage.yaml,1018aut202505310536405_CT-100.json,Changed â€“ Validated
+1090csr1202505062122209001_PT.pdf,14,Business Auto,SSD,limits,limits_with_coverage.yaml,1090csr1202505062125209003_CT-14.json,Validated
+1018aut202505310536405_CT.PDF,14,Business Auto,MSD,limits,limits_with_coverage.yaml,1018aut202505310536405_CT-14.json,
+1018aut202505310536405_CT.PDF,100,Business Auto,MSD,limits,limits_with_coverage.yaml,1147prp202507312310545_CT-44.json,
+1162ADD202508010003086007_CT.pdf,9,Accidental Death Dismemberment,MSD,limits,sublimits_with_coverage.yaml,1162ADD202508010003086007_CT_limit_9.json,
+1162ADD202508010003086007_CT.pdf,10,Accidental Death Dismemberment,MSD,limits,sublimits_with_coverage.yaml,1162ADD202508010003086007_CT_limit_10.json,
+1143cbl202507311438860_CT.pdf,6,Cyber Liability,AR,limits,section_limits_with_coverage.yaml,1143cbl202507311438860_CT_6.json,validatedd
+1000pro202510150844890_pro_pt00.pdf,5,professional liability,AR,limits,section_limits_with_coverage.yaml,1144cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_pt00.pdf,4,professional liability,AR,limits,section_limits_with_coverage.yaml,1145cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_pt00.pdf,7,professional liability,AR,limits,section_limits_with_coverage.yaml,1146cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_pt00.pdf,8,professional liability,AR,limits,section_limits_with_coverage.yaml,1147cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_ct00.pdf,7,professional liability,AR,limits,section_limits_with_coverage.yaml,1148cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_ct00.pdf,8,professional liability,AR,limits,section_limits_with_coverage.yaml,1149cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_ct00.pdf,9,professional liability,AR,limits,section_limits_with_coverage.yaml,1150cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_ct00.pdf,4,professional liability,AR,limits,section_limits_with_coverage.yaml,1151cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_ct00.pdf,5,professional liability,AR,limits,section_limits_with_coverage.yaml,1152cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_ct00.pdf,14,professional liability,AR,limits,section_limits_with_coverage.yaml,1153cbl202507311438860_CT_6.json,newly added 
+1000pro202510150844890_pro_ct00.pdf,15,professional liability,AR,limits,section_limits_with_coverage.yaml,1154cbl202507311438860_CT_6.json,newly added 
+1003woc202510150849931_woc_ct00.pdf,2,worker compensation,AR,limits,sublimits_with_coverage.yaml,1155cbl202507311438860_CT_6.json,newly added 
+1000pkg202510150847223_pkg_ct00.pdf,130,Package,AR,limits,sublimits_with_coverage.yaml,1156cbl202507311438860_CT_6.json,newly added 
+1003aut202510150853926_aut_pt00.pdf,9,Business Auto,AR,limits,alternate_limits_with_coverage.yaml,1157cbl202507311438860_CT_6.json,newly added 
+1003aut202510150857259_aut_ct00.pdf,4,Business Auto,AR,limits,limits_with_coverage.yaml,1158cbl202507311438860_CT_6.json,newly added 
+1000aut202511040406344_aut_ct00.pdf,16,Business Auto,AR,limits,alternate_limits_with_coverage.yaml,1159cbl202507311438860_CT_6.json,newly added 
+RENEWAL_QUOTE.pdf,31,Property,AR,limits,sublimits_with_coverage.yaml,1159cbl202507311438860_CT_6.json,newly added 
+1142cbl20251113210903768_cbl_ct00.pdf,11,Property,AR,limits,sublimits_with_coverage.yaml,1160cbl202507311438860_CT_6.json,newly added 
+1090cel202511132104265001_CT.pdf,10,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1161cbl202507311438860_CT_6.json,newly added 
+1090cel202511132104265001_CT.pdf,11,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1090cel202511132104265001_CT.pdf,12,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1163cbl202507311438860_CT_6.json,newly added 
+1090cel202511132104265001_CT.pdf,13,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1164cbl202507311438860_CT_6.json,newly added 
+1008umb202511142118966_CT.pdf,13,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1164cbl202507311438860_CT_6.json,newly added 
+1008umb202511142118966_Quote.pdf,2,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1164cbl202507311438860_CT_6.json,newly added 
+1008umb202511150028148_CT.pdf,10,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1164cbl202507311438860_CT_6.json,newly added 
+1008umb202511150028148_CT.pdf,11,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1164cbl202507311438860_CT_6.json,newly added 
+1090cel202511132104265001_Binder.pdf,6,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1164cbl202507311438860_CT_6.json,newly added 
+1090cel202511132104265001_Binder.pdf,7,Business Auto,AR,limits,underlying_sublimits_with_coverage.yaml,1164cbl202507311438860_CT_6.json,newly added 
+1090add202511132106265001_QUOTE.pdf,1,Property,AR,limits,sublimits_with_coverage.yaml,1160cbl202507311438860_CT_6.json,newly added 
+1003cel202511180603916_cel_ct00.pdf,6,Property,AR,limits,underlying_sublimits_with_coverage.yaml,1160cbl202507311438860_CT_6.json,newly added 
+1000exd202511180624886_exd_ct00.pdf,17,Business Auto,AR,limits,limits_with_coverage.yaml,1160cbl202507311438860_CT_6.json,newly added 
+1000cgl202511180627556_cgl_ct00.pdf,13,Business Auto,AR,limits,limits_with_coverage.yaml,1160cbl202507311438860_CT_6.json,newly added 
+1003aut202511180600049_aut_pt00.pdf,12,General Liability,AR,limits,cost_new_limit_with_vin_coverage.yaml,1161cbl202507311438860_CT_6.json,newly added 
+1003aut202511180600049_aut_pt00.pdf,13,General Liability,AR,limits,cost_new_limit_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003aut202511180604958_aut_ct00.pdf,11,General Liability,AR,limits,cost_new_limit_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003aut202511180604958_aut_pt00.pdf,13,General Liability,AR,limits,cost_new_limit_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003aut202511180559532_aut_pt00.pdf,18,General Liability,AR,limits,cost_new_limit_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003aut202511180559532_aut_pt00.pdf,19,General Liability,AR,limits,cost_new_limit_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+QUOTE.pdf,2,General Liability,AR,limits,underlying_sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003aut202511270722970_CT.pdf,3,Business Auto,AR,limits,alternate_limits_with_auto_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003cbl20251205095625147_cbl_ct00.pdf,4,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003bop20251205095125834_bop_ct00.pdf,1,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1099dol20251211143243454_CT.pdf,4,General Liability,AR,limits,align_sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1099dol20251211143243454_CT.pdf,4,General Liability,AR,limits,align_sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1090aut1202512152110000015_aut_ct00.pdf,2,General Liability,AR,limits,cost_new_sublimits_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1090aut1202512152110000015_aut_ct00.pdf,3,General Liability,AR,limits,cost_new_sublimits_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003flo20251215061848553_flo_ct00.pdf,1,General Liability,AR,limits,limits_with_flood_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1003flo20251215061848553_flo_pt00.pdf,1,General Liability,AR,limits,limits_with_flood_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1150flo1202512180010000030_flo_ct00.pdf,1,General Liability,AR,limits,limits_with_flood_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1090aut1202512152110000013_aut_ct00.pdf,33,General Liability,AR,limits,cost_new_limit_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1175aut20251215160110298_aut_ct00.pdf,3,General Liability,AR,limits,cost_new_limit_with_vin_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+"Gem Parent, L.P. Financial Institution Bond Binder.pdf",4,General Liability,AR,limits,limits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1099cbl20251217164343450_cbl_ct00.pdf,5,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1099cbl20251217164343450_cbl_ct00.pdf,6,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1165oce1202512172330000030_oce_ct00.pdf,14,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+Linx Quote Sheet V3.pdf,1,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1006cgl20251224040454276_cgl_ct00.pdf,9,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1099cel20251223183503667_cel_ct00.pdf,4,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+Binder.pdf,3,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+2025 XS TLL REN Quote Mobis v3 Intact.pdf,3,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1090cbr1202512232110000024_cbr_ct00.pdf,7,General Liability,AR,limits,limits_coverage_two_column.yaml,1162cbl202507311438860_CT_6.json,newly added 
+Binder - Clarity Technologies - 5 x 25 - XDO - CNA - 2025.pdf,6,General Liability,AR,limits,sublimits_amount_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+Binder - Clarity Technologies - 5 x 25 - XDO - CNA - 2025.pdf,7,General Liability,AR,limits,sublimits_amount_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+Binder-Excess Auto Liability (11.26.25-26) Insured_Binder.pdf,5,General Liability,AR,limits,underlying_limits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 
+1099pro20251230114413805_pro_ct00.pdf,16,Business Auto,AR,limits,limits_with_coverage.yaml,1160cbl202507311438860_CT_6.json,newly added 
+1099mis20251231130557960_mis_ct00.pdf,2,Business Auto,AR,limits,alternate_limits_with_coverage.yaml,1160cbl202507311438860_CT_6.json,newly added 
+1007woc202512311926186_woc_ct00.pdf,6,General Liability,AR,limits,sublimits_with_coverage.yaml,1162cbl202507311438860_CT_6.json,newly added 

@@ -1,0 +1,31 @@
+field: 'deductible'
+
+also_appears_as: ["{deductible}"] 
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible value (examples: "$10,000", "$500", **"10%"**, "$250,000.00").' "{extra_info}"
+          - 'Ignore values that belong to "{invalid_coverage}".'
+          - 'Don't extract the amount from premium'.
+          - 'the deductible amount presented in "item 3" print both deductibles.'
+          
+       - coverage for deductible:
+          - 'Associated coverage given by Liability "{top_coverage}".'
+          - 'Examples include: ("Building Coverage","Spoilage", etc...).'
+          - 'if there is no coverage mention extract "{top_coverage}" hard coded coverage.'
+          
+       - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+            
+  rules: 
+     - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid deductible amount.'
+     - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+     - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+     - 'dont extract which are containing "Endorsement" like (eg: "SSPN-018 07 23 -- Notice To Texas Policy Holder", "PR 037 (02/12)-- Leasehold Interest Endorsement").'
+
+
+output_fields: ["deductible amount", "coverage for deductible", "line_of_business"]

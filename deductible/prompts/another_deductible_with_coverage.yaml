@@ -1,0 +1,45 @@
+field: 'deductible'
+
+also_appears_as: ["deductible","{deductible}"]
+
+what_to_extract:
+  deductible:
+    description: |
+      A list where each item has:
+
+      - deductible amount:
+          - 'The deductible value (examples: "20,000" "$500", "20 hours", "$1,000").'
+          - 'Include "Waiting Period" values (e.g., "48hours", "24 hours") in the same field.'
+          - 'extract $ amount deductibles under this header "Scheduled Auto Physical Damage Deductibles:" only.' 
+          - 'Ignore values that belong to these "{invalid_coverage}", "{invalid_headers}", "{invalid_ded}" headers.'
+          - 'Don't extract the amount from premium'.
+
+
+        - coverage for deductible:
+          - 'Associated description given by "{top_coverage}".'
+          - 'extract the coverage under these headers of "Other Than Collision:" and "Collision:" only ignore rest.'
+          - 'For waiting periods, use "Waiting Period" as the coverage.'
+          - **'Extract the full description from the "Coverage" column that is on the same row as the deductible amount.'**
+          - 'extract data from rows that have a numerical deductible amount or valid time period only which are ends with "hour", "hours" (e.g., "24 hours").'
+
+
+       - line_of_business:
+         - 'extract the line_of_business(lob) from the page.'
+        
+
+  rules: 
+     - 'Skip rows containing "{invalid_headers}", "form number", "form no" these are invalid deductible amount.'
+     - 'Ignore related to "{invalid_coverage}" these are invalid deductible coverages.'
+     - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+     - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
+     - 'If there are multiple deductible amounts with different coverages extract all with their respective coverage.'
+     - 'Extract data from rows that have a time period only with the unit "hours" or "hour" (e.g., "72 hours").'
+     - 'extract all time based values ending with "hours", "hour". These must always be treated as deductible values.' 
+     - '**CRITICAL: Extract values when keywords appear: "{deductible}" these are deductibles**.'
+     - '**CRITICAL: Dont extract values which are unders or belongs to these "{invalid_headers}, "{invalid_coverage}"**.'
+     - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
+     - 'dont extract from where its look like "TABLE OF CONTENTS" because these are invalid deductible amount.'
+ 
+
+
+output_fields: ['deductible amount', 'coverage for deductible', 'line_of_business']
