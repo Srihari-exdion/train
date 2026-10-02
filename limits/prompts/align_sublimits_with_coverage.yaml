@@ -34,13 +34,13 @@ what_to_extract:
           - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
 
     rules:
-      - 'If "{sublimits_and_aggregates}" have separate amount then, extract them separately as separate limits'
+      - 'If "{sublimits_and_aggregates}" have separate amount then, extract them separately as separate limits.'
       - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
-      - 'Extract single line limits as well which are not in tabular format'
+      - 'Extract single line limits as well which are not in tabular format.'
       - 'Skip entries where "deductible", "retention", "coverage retention", "insured entity retention", or "waiting period" is mentioned in row or column.'
       - 'Skip rows and columns containing "premium", "form number", "form no", "premium values" or with no valid limit amount.'
       - 'Do not leave "coverage for limits" blank — always pull the description from the same row as the limit.'
-      - 'Preserve formatting exactly as shown in the source'
+      - 'Preserve formatting exactly as shown in the source.'
       - 'If a key has no value, omit the key entirely (do not return null or "").'
 
 output_fields: ['limit amount','sublimits and aggregate','coverage for limits', 'line_of_business']
