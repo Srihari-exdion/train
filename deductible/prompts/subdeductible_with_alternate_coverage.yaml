@@ -29,4 +29,4 @@ what_to_extract:
       - 'If the entire entry for deductible, deductible amount, or retention amount is "{ded_exclude}", do not return it in the output.'
       - 'dont extract which are containing "{limits}" values in row and columns because these are invalid deductible amount.'
 
-output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]        
+output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]
