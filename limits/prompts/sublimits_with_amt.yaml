@@ -33,6 +33,8 @@ what_to_extract:
             - 'Format: "[Header Name] [Amount]".'
             - 'Example: "Monthly Work Loss $2,000, Other Expenses (Per Day) $25, Additional Death Benefit $0".'
             - 'If the amount is "$ Included", you can skip it, but extract all numerical values.'
+            - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
+
         - line_of_business:
           - 'Extract the line of business (LOB) for each row.'
           - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'

@@ -17,7 +17,7 @@ deductible:
  
             - subdeductible and aggregate:
                 - Extract the sub-deductible label (e.g., "comp ded", "coll ded") found on the same row as the deductible amount.
-                
+                - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'                
             - "coverage for deductible":
                 - 'Must include the associated description given by "VIN".(example: "1D9HU12161G224009")'
                 - For waiting periods, use "Waiting Period" as the coverage.  

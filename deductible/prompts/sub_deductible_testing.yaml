@@ -20,6 +20,7 @@ what_to_extract:
           - 'Extract labels associated with the deductible such as "{sublimits_and_aggregates}" etc., if present near the deductible amount.'
           - 'If multiple deductible values exist with different labels, extract each separately with its corresponding label.'
           - 'If no label is present, omit this field.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for deductible:
           - 'Extract the full coverage description from the same row (e.g., "{top_coverage}").'

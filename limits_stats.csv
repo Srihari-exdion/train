@@ -97,11 +97,11 @@ limits_coverage_two_column.yaml,limits_coverage_two_column.yaml,True,94
 sublimits_amount_with_coverage.yaml,sublimits_amount_with_coverage.yaml,True,95
 sublimits_amount_with_coverage.yaml,sublimits_amount_with_coverage.yaml,True,96
 underlying_limits_with_coverage.yaml,underlying_limits_with_coverage.yaml,True,97
-limits_with_coverage.yaml,limits_with_coverage.yaml,True,98
+limits_with_coverage.yaml,sublimits_with_coverage.yaml,False,98
 alternate_limits_with_coverage.yaml,alternate_limits_with_coverage.yaml,True,99
 sublimits_with_coverage.yaml,sublimits_with_coverage.yaml,True,100
 limits_with_coverage.yaml,limits_with_coverage.yaml,True,101
-limits_inside_coverage.yaml,limits_with_coverage.yaml,False,102
+limits_inside_coverage.yaml,limits_inside_coverage.yaml,True,102
 limits_with_coverage.yaml,limits_with_coverage.yaml,True,103
 alternate_limits_with_auto_coverage.yaml,alternate_limits_with_auto_coverage.yaml,True,104
 alternate_limits_with_coverage.yaml,alternate_limits_with_coverage.yaml,True,105
@@ -186,3 +186,8 @@ hard_cases_for_limits.yaml,hard_cases_for_limits.yaml,True,183
 stated_amt_with_coverage.yaml,stated_amt_with_coverage.yaml,True,184
 sublimit_with_multiple_coverage.yaml,sublimit_with_multiple_coverage.yaml,True,185
 sublimit_with_multiple_coverage.yaml,sublimit_with_multiple_coverage.yaml,True,186
+alternate_limits_with_coverage.yaml,alternate_limits_with_coverage.yaml,True,187
+limits_with_coverage.yaml,limits_with_coverage.yaml,True,188
+sublimits_with_coverage.yaml,sublimits_with_coverage.yaml,True,189
+sublimits_with_coverage.yaml,sublimits_with_coverage.yaml,True,190
+sublimits_with_coverage.yaml,sublimits_with_coverage.yaml,True,191

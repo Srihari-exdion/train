@@ -18,6 +18,7 @@ what_to_extract:
           - 'Extract the label or descriptor associated with the deductible (examples: "Each Incident Retention",  "{sublimits_and_aggregates}").'
           - 'If multiple deductible values exist with different labels, extract each as a separate object.'
           - 'If no label is present, return an empty string.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
       - coverage for deductible:
           - 'Extract the full coverage, section title, or endorsement associated with the deductible.'

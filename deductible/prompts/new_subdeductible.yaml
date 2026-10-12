@@ -16,6 +16,7 @@ what_to_extract:
         - subdeductible and aggregate:
           - 'Extract the sub-deductible label (e.g., "{sublimits_and_aggregates}") found near the deductible amount.'
           - 'you will find like (eg: "A","B","C","D","E","F"and etc.....) under the deductible tag extract every amount having "$" under the deductible tag.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
 
         - coverage for deductible:

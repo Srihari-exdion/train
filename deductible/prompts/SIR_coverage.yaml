@@ -18,6 +18,7 @@ what_to_extract:
           - 'Extract associated labels such as "{sublimits_and_aggregates}" etc., from the same text.'
           - 'If multiple deductible values exist with different labels, extract each separately with its corresponding label.'
           - 'If no clear label exists, omit this field.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for deductible:
           - 'Extract the full title from the "{coverage}" column corresponding to the deductible.'

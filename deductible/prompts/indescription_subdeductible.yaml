@@ -19,6 +19,7 @@ what_to_extract:
           - 'Extract ALL subdeductible which are ends with (e.g., "Each Customer's Auto", "Any One Event") in the description into the subdeductible field.'
           - 'If multiple deductible values exist with different qualifiers, extract each separately with its corresponding label.'
           - 'If no qualifier is present, omit this field.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
 
         - coverage for deductible:

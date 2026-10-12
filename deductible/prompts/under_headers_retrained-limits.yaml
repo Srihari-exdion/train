@@ -20,6 +20,7 @@ what_to_extract:
        - subdeductible and aggregate:
           - 'Extract the sub-deductible label (e.g., "{sublimits_and_aggregates}") found near the deductible amount.'
           - 'From headers like "Retained Limits" and "Schedule of Retained Limits", extract every amount with "$" under these tags.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
 
        - coverage for deductible:

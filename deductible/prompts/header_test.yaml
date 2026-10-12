@@ -19,7 +19,7 @@ what_to_extract:
         - 'Extract the label associated with the retention such as "{sublimits_and_aggregates}".'
         - 'If multiple sub-retentions exist (example: Waiting period and Enhanced waiting period), extract them together for the same coverage.'
         - 'If no label is explicitly written, use "Retention".'
-
+        - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
       - coverage for deductible:
         - 'Extract the full Insuring Agreement / "{Coverage}" name from the left column corresponding to the retention.'

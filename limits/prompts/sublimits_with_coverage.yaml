@@ -1,6 +1,6 @@
 field: 'limits'
 
-also_appears_as: ["{limits}", "TIV"]
+also_appears_as: ["{limits}", "TIV","Attachment Point"]
 
 system_notes:
   - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
@@ -12,11 +12,7 @@ what_to_extract:
       A list where each item represents a single row of coverage and has:
 
         - limit amount:
-          - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "$2,010,000 Aggregate", "$1,010,000 Each Occurrence"). "{extra_info}"'
-          - 'CRITICAL:DO NOT extract If a value is found under a header like "{deductible}", they are invalid limit.'
-          - 'Ignore values that belong to "{invalid_coverage}".'
-          - 'Must contain only currency values with the dollar symbol ($) included exactly as shown in the document'
-          - 'Do not extract the amount from premium.
+          - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "$2,010,000 Aggregate", "$1,010,000 Each Occurrence").'
           - 'Do not extract the amount from these context "{invalid_headers}" headers cause these are invalid limits.'
           - '**extract the $ amount from the "TIV" means "total insured value" and its beakdown values.**'
           - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
@@ -24,16 +20,18 @@ what_to_extract:
                    
         - sublimits and aggregate:
             - 'Extract the sub-limit label like ("{sublimits_and_aggregates}") found near the limit amount.'
-            - 'extract $ amount under these headers like ("{sublimits_and_aggregates}")'
-            - 'Extract row-specific sublimit/aggregate labels ONLY if they appear in separate dedicated column headers or explicit standalone modifiers for that row. example "{sublimits_and_aggregates}"'
+            - 'extract $/monetary amount under these headers like ("{sublimits_and_aggregates}").'
+            - 'Extract row-specific "{sublimits_and_aggregates}" labels ONLY if they appear in separate dedicated column headers or explicit standalone modifiers for that row.'
             - 'Do not extract words like "sublimit" or "aggregate" if they are already part of the textual sentence in the "coverage for limits" description.'
             - 'If no standalone row-level "{sublimits_and_aggregates}" label is found, omit this key.'
+            - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for limits:
-          - 'Associated description given by LIABILITY "{coverage}" etc.'
-          - 'Extract the full coverage as shown in the source with sublimit and aggregate ,if mentioned'
+          - 'Associated description given by "{coverage}" etc.'
+          - 'Extract the full coverage as shown in the source with sublimit and aggregate ,if mentioned.'
           - 'This value is the description from the first column of the row.'
-          - 'Do not extract "line of business" in this field'
+          - 'Ignore values that belong to "{invalid_coverage}".'
+          - 'Do not extract "line of business" in this field.'
 
         - line_of_business:
           - 'Extract the line of business (LOB) for each row.'
@@ -42,10 +40,11 @@ what_to_extract:
     rules:
       - '**STRICT RULE : Always split the dollar amounts and extract them separately under **`{sublimits_and_aggregates}`** when the **Each Claim or Event** and **Aggregate** amounts are shown side by side.**'
       - 'STRICT RULE: Headers like "{deductible}" belong to Deductibles only. Skip all values under these headers.'
-      - 'Extract single line limits as well which are not in tabular format'
+      - 'Extract single line limits as well which are not in tabular format.'
       - 'Skip extraction entries where "{deductible}"  is mentioned in row or column these are invalid limit amount.'
       - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid limit amount.'
       - 'Skip rows and columns containing "premium", "form number", "form no", "premium values" or with no valid limit amount.'
       - 'Preserve formatting exactly as shown in the source of image.'
+      - "The insurer's maximum financial exposure, payout ceiling, or contractual status assigned to a coverage (including any qualifying basis such as per-person, per-occurrence, per-accident, per-loss, or aggregate scope)."
 
 output_fields: ['limit amount','sublimits and aggregate','coverage for limits', 'line_of_business']

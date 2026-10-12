@@ -21,9 +21,10 @@ what_to_extract:
             - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
 
         - sublimits and aggregate:
-            - '(example: "each claim", "aggregate", "each event")'
-            - 'Each sublimit and aggregate may have separate amount - Extract each amount respectively' 
-            - 'Example of sublimits and aggregate headers are as follows "{sublimits_and_aggregates}"'
+            - '(example: "each claim", "aggregate", "each event").'
+            - 'Each sublimit and aggregate may have separate amount - Extract each amount respectively.' 
+            - 'Example of sublimits and aggregate headers are as follows "{sublimits_and_aggregates}".'
+            - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for limits:
             - 'Associated description given by "Section" etc.'

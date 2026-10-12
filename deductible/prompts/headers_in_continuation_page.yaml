@@ -20,7 +20,7 @@ deductible:
         - 'Extract the sub-deductible or aggregate label (eg: "{sublimits_and_aggregates}") found near the deductible amount if present.'
         - 'If no subdeductible or aggregate is mentioned, return "".'
         - 'You will find a header on the top like (eg: "Retention", "RETENTIONS:", "Deductibles") — extract every deductible value under these headers.'
-
+        - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
     - coverage for deductible:
       - 'Associated description given by "{top_coverage}" etc.'
       - 'Extract the full coverage description from the same row as the deductible amount (left column aligned with the value).'

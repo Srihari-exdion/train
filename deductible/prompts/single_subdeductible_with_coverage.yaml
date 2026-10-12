@@ -17,6 +17,7 @@ what_to_extract:
 
         - subdeductible and aggregate:
           - 'Extract the sub-deductible label "{sublimits_and_aggregates}" found on the same row as the deductible amount.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for deductible:
           - 'Extract the full description from the "{coverage}" column that is on the same row as the deductible amount.'

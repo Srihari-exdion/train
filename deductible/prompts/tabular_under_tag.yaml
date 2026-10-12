@@ -19,6 +19,7 @@ what_to_extract:
        - subdeductible and aggregate:
           - 'Extract the sub-deductible label (eg: "{sublimits_and_aggregates}") found near the deductible amount.'
           - 'You will find a header on the top like (eg: "Retention", "RETENTIONS:") — extract every amount having "$" amount under the deductible headers.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
 
        - coverage for deductible:

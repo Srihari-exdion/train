@@ -25,6 +25,7 @@ what_to_extract:
           - 'Combine the labels "{sublimits_and_aggregates}" from the column headers into one comma-separated string.'
           - 'Extract amount with each "{sublimits_and_aggregates}" respectively'
           - '(example: "Part of $3,000,000, Excess of $2,000,000")'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
 
       - coverage for limits:

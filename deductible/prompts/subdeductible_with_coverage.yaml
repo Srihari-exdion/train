@@ -19,6 +19,7 @@ what_to_extract:
           - '"{sublimits_and_aggregates}" will be beside of the deductible amount even there is huge gap between amount and sublimits_and_aggregates.'
           - 'If same amount repeated, extract each separately with respective "{sublimits_and_aggregates}".'
           - 'If multiple deductible values exist on same row with different labels, extract each separately.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for deductible:
           - 'Extract the full description from the "{coverages}" column that is on the same row as the deductible amount.'
@@ -42,3 +43,6 @@ what_to_extract:
 
 
 output_fields: ["deductible amount", "subdeductible and aggregate", "coverage for deductible", "line_of_business"]        
+
+
+

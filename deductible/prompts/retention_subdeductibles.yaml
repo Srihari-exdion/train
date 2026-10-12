@@ -19,6 +19,7 @@ what_to_extract:
         - 'Extract the retention column header or sub-label associated with the retention amount (examples: "Each Cyber Incident Retention", "Each Claim Retention", "{sublimits_and_aggregates}").'
         - 'If the value corresponds to a Waiting Period, use "Waiting Period" as the sub deductible.'
         - 'If multiple retention types exist for different coverages, extract each coverage with its corresponding retention separately.'
+        - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
 
       - coverage for deductible:

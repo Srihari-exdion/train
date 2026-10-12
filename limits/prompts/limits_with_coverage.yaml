@@ -11,8 +11,8 @@ what_to_extract:
     description: |
       A list where each item has:
         - limit amount:
-            - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "2,010,000", "$645,596").'
-            - 'Ignore values that belong to "{invalid_coverage}".'
+            - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "2,010,000", "$645,596", "$1Moutside the limit", "$1,000,000 Sublimit;").'
+            - 'sometimes they mention like(eg., "$100,000 Sublimit;") extract in these kind of values till where you find this symbol in image ";".'
             - 'If multiple valid limits appear in the same row, combine them into a single string, comma-separated.'
             - 'Must contain only currency values **with the dollar symbol ($) included exactly as shown in the document**.'
             - 'Strictly ignore values belonging to: "{invalid_coverage}" or headers like: "{invalid_headers}".'

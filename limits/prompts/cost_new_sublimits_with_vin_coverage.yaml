@@ -24,7 +24,8 @@ what_to_extract:
         - sublimits and aggregate:
             - '(example: "per day", "each", "Actual Cash Value")'
             - 'Combine the labels "{sublimits_and_aggregates}" from limit amount into one comma-separated string.'
-            - 'If same amount repeated, extract each separately with respective "{sublimits_and_aggregates}" limit'
+            - 'If same amount repeated, extract each separately with respective "{sublimits_and_aggregates}" limit.'
+            - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - "coverage for limits":
           - 'Associated description given by "{vin_coverage}" and "coverages"'

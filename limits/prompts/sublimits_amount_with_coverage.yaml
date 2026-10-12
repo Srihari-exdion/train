@@ -21,13 +21,15 @@ what_to_extract:
 
             
         - sublimits and aggregate:
-            - '(example: "each claim $10,000", "aggregate $10,000")'
-            - 'Combine the amount related to "{sublimits_and_aggregates}" like "excess of $10,000"'
-            - 'Extract each separately with respective "{sublimits_and_aggregates}" limit'
+            - '(example: "each claim $10,000", "aggregate $10,000").'
+            - 'Combine the amount related to "{sublimits_and_aggregates}" like "excess of $10,000".'
+            - 'Extract each separately with respective "{sublimits_and_aggregates}" limit.'
+            - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for limits:
             - 'Associated description given by LIABILITY "{coverage}" etc.'
             - 'This value is the description from the first column of the row.'
+            - 'if you finds ("Attachment Point of First Limit of Liability") extract the monetary amount.'
         
         - line_of_business:
           - 'Extract the line of business (LOB) for each row.'
@@ -39,9 +41,7 @@ what_to_extract:
       - 'Skip entries where "deductible", "retention", "coverage retention", "insured entity retention", or "waiting period" is mentioned.'
       - 'Skip rows containing "premium", "form number", "form no", "premium values" or with no valid limit amount.'
       - 'Do not leave "coverage for limits" blank — always pull the description from the same row as the limit.'
-      - 'Preserve formatting exactly as shown in the source
-        (e.g., "$250k defense sublimit", "$250K sublimit non-monetary defense").'
-      - 'If a key has no value, omit the key entirely (do not return null or "").'
+      - 'Preserve formatting exactly as shown in the source (e.g., "$250k defense sublimit", "$250K sublimit non-monetary defense").'
       - 'Each output object in the list must correspond to a single row of coverage from the document, combining all relevant data points from that row.'
 
 output_fields: ['limit amount','sublimits and aggregate','coverage for limits', 'line_of_business']

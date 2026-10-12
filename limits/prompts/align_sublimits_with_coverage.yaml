@@ -24,6 +24,7 @@ what_to_extract:
             - 'If same amount repeated, extract each separately with respective "{sublimits_and_aggregates}" limit'
             - 'Do not extract general column headers (like "Per Occurrence") unless they are uniquely specified as a sublimit modifier for that line.'
             - 'If no distinct row-level "{sublimits_and_aggregates}" label is present, omit this key.'
+            - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for limits:
             - 'Associated description given by LIABILITY "{coverage}" etc.'

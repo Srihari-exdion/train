@@ -22,6 +22,7 @@ what_to_extract:
         - sublimits and aggregate:
             - '(example: "each claim", "aggregate")'
             - 'Combine the labels "{sublimits_and_aggregates}" from the column headers into one comma-separated string.'
+            - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for limits:
             - 'Associated description given by LIABILITY "{auto_coverage}" etc.'

@@ -15,6 +15,7 @@ what_to_extract:
 
         - sublimits and aggregate:
             - 'Always extract the column header labels for deductibles (e.g., "{sublimits_and_aggregates}") and return as a comma-separated string.'
+            - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
         - coverage for deductible:
             - 'Extract directly from the "{auto_coverage}" column of the same row.'

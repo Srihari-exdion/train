@@ -16,6 +16,7 @@ what_to_extract:
 
        - "subdeductible and aggregate":
           - 'Extract labels like ("{sublimits_and_aggregates}", "Each Claim", or "Aggregate") found in the header or near the amount.'
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
        - "coverage for deductible":
             - 'Associated description given by LIABILITY "{top_coverage}" etc.'

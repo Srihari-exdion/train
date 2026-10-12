@@ -29,6 +29,7 @@ what_to_extract:
               - 'If the amount is explicitly associated with a qualifier such as "each Pollution Condition", include that qualifier with the corresponding limit.'
               - 'Only extract aggregate information when an actual monetary amount is associated with that aggregate context.'
               - 'Do not treat Deductible or Retroactive Date as a sublimit or aggregate.'
+              - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
 
           - coverage for limits:
               - 'Extract the coverage description from the same row as the liability limit amount.'

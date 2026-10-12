@@ -15,7 +15,7 @@ deductible_with_coverage.yaml,deductible_with_coverage.yaml,True,12
 deductible_with_coverage.yaml,deductible_with_coverage.yaml,True,13
 deductible_with_coverage.yaml,deductible_with_coverage.yaml,True,14
 subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,15
-deductible_with_coverage.yaml,subdeductible_with_coverage.yaml,False,16
+deductible_with_coverage.yaml,deductible_with_coverage.yaml,True,16
 deductible_with_coverage.yaml,deductible_with_coverage.yaml,True,17
 deductible_with_coverage.yaml,deductible_with_coverage.yaml,True,18
 deductible_with_coverage.yaml,deductible_with_coverage.yaml,True,19
@@ -155,7 +155,7 @@ only_hours.yaml,only_hours.yaml,True,152
 retention_undertag.yaml,retention_undertag.yaml,True,153
 header_test.yaml,header_test.yaml,True,154
 header_test.yaml,header_test.yaml,True,155
-subdeductible_with_coverage.yaml,new_under_header_tag.yaml,False,156
+subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,156
 header_test.yaml,header_test.yaml,True,157
 top_header_retention.yaml,top_header_retention.yaml,True,158
 header_test.yaml,header_test.yaml,True,159
@@ -243,3 +243,4 @@ test_auto_coverage.yaml,test_auto_coverage.yaml,True,240
 test_auto_coverage.yaml,test_auto_coverage.yaml,True,241
 waiting_period.yaml,waiting_period.yaml,True,242
 deductible_with_auto_coverage.yaml,deductible_with_auto_coverage.yaml,True,243
+deductible_with_twocoverage.yaml,deductible_with_twocoverage.yaml,True,244

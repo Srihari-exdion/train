@@ -18,7 +18,7 @@ what_to_extract:
           - 'Extract the sub-deductible label (e.g., "{sublimits_and_aggregates}") found near the deductible amount.'
           - 'If multiple deductible values exist on same row with different labels, extract each separately.'
           - 'If no sub-label exists, omit this key.'
-
+          - 'If there is NO explicit "{sublimits_and_aggregates}" text or value in the source document, the value MUST be NULL.'
         - coverage for deductible:
           - 'Extract the full description from the "{Coverage}" column or first column that is on the same row as the deductible amount.'
           - 'For waiting periods, extract the actual coverage description (e.g., "Waiting Period for Delay in Completion"), NOT just "Waiting Period".' 
