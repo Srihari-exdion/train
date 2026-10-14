@@ -14,14 +14,14 @@ what_to_extract:
 
         - "limit cost new amount":
           - 'Extract only the numerical value immediately following the "COST NEW:" label. (e.g., in "COST NEW: 96405", extract "96405"). "{extra_info}"'
-          - 'extract the limit amount near "Cost New", "original cost new" only ignore other "{limits}".'
-          - 'Ignore values that belong to "{invalid_coverage}".'
+          - 'extract the limit amount near "{alternate_limits}".'
+          - 'Ignore values that belong to "{limits}".'
           - 'Do not extract the limit amount from "Premiums" or "Premium" column'
           - 'If header is "Premium", "Premiums", or "Deductible" do not extract that amount'
           - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
 
         - "vehicle identification for limits":
-          - 'Associated description given by "{vin_coverage}"'
+          - 'Associated description given by "{vin_coverage}".'
           - 'Extract the "{alternate_limits}" associated with the specific vehicle where "{vin_coverage}" is found.'
           - 'Examples: "VIN: 123ABC8576888", "ID NO 4DRBUAFN67B123456" etc.'
           - 'Add VEHICLE IDENTIFICATION NUMBER (VIN) as description.'
