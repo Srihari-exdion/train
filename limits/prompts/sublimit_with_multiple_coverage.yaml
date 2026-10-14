@@ -42,6 +42,7 @@ what_to_extract:
             - 'Extract the line of business (LOB) for each coverage row.'
             - 'Identify the Line of Business (LOB) for each row from the referred LOB below.'
     rules:
+      - 'dont extract % values for limits.'
       - 'Extract only limits from the Coverage Part Limit of Liability / liability-limit portion of the document.'
       - 'If a coverage row contains both a liability limit and a Coverage Part Aggregate Limit, create separate limit entries for the respective amounts and preserve their separate "{sublimits_and_aggregates}" contexts.'
       - 'For example, if a row contains "$1,000,000 each Pollution Condition" under Coverage Part Limit of Liability and "$1,000,000" under Coverage Part Aggregate Limit, do not combine them into "$1,000,000 each Pollution Condition / $1,000,000 Aggregate". Keep them as separate limit amounts with their respective contexts.'

@@ -35,5 +35,6 @@ what_to_extract:
       - 'Do not leave "auto coverage for limits" or "auto description for limits" blank for any extracted limit amount.'
       - 'Preserve exact character casing, spacing, numbers, punctuation, and currency symbols as rendered in the document.'
       - 'If a key or field has no visible value in a row, omit the key or record entirely.'
+      - 'Do not extract the amount from premium or (eg., "BKT #2", "BKT #3", "BKT #4", "BKT #5", etc...) because they are not valid limits amounts/monetary values.'
 
 output_fields: ['limit amount', 'auto coverage for limits', 'auto description for limits', 'line_of_business']

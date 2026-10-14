@@ -14,7 +14,7 @@ what_to_extract:
 
         - "limit cost new amount":
           - 'Extract only the numerical value immediately following the "COST NEW:" label. (e.g., in "COST NEW: 96405", extract "96405"). "{extra_info}"'
-          - 'Only extract the limit amoount near "Cost New"'
+          - 'extract the limit amount near "Cost New", "original cost new" only ignore other "{limits}".'
           - 'Ignore values that belong to "{invalid_coverage}".'
           - 'Do not extract the limit amount from "Premiums" or "Premium" column'
           - 'If header is "Premium", "Premiums", or "Deductible" do not extract that amount'

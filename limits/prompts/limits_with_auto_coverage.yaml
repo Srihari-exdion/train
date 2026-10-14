@@ -15,7 +15,7 @@ what_to_extract:
             - 'Ignore values that belong to "{invalid_coverage}".'
             - 'If multiple valid limits appear in the same row, combine them into a single string, comma-separated.'
             - 'Must contain only currency values **with the dollar symbol ($) included exactly as shown in the document**'
-            - 'Do not extract the amount from premium'
+            - 'Do not extract the amount from premium or (eg., "BKT #2", "BKT #3", "BKT #4", "BKT #5", etc...) because they are not valid limits amounts/monetary values.'
             - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
 
         - coverage for limits:
@@ -33,8 +33,7 @@ what_to_extract:
       - 'Skip entries where "{deductible}" is mentioned.'
       - 'Skip rows containing "{invalid_headers}" or with no valid limit amount.'
       - 'Do not leave "coverage for limits" blank — always pull the description from the same row as the limit.'
-      - 'Preserve formatting exactly as shown in the source
-        (e.g., "$250k defense sublimit", "$250K sublimit non-monetary defense").'
+      - 'Preserve formatting exactly as shown in the source (e.g., "$250k defense sublimit", "$250K sublimit non-monetary defense").'
       - 'If a key has no value, omit the key entirely (do not return null or "").'
 
 output_fields: ['limit amount', 'coverage for limits', 'line_of_business']
