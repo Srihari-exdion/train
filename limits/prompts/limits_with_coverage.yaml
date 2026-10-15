@@ -19,8 +19,8 @@ what_to_extract:
             - 'always dont extract two $ amounts in one string, separate them with respective headers and Coverage.'
 
         - coverage for limits:
-            - 'Associated description given by LIABILITY "{coverage}" etc..'
-            - 'Do not extract coverage if "{invalid_coverage}" is mention.'
+            - 'Associated coverage description given under these headers "Title", "{coverage}".'
+            - 'extract limit amount with their respective "Title"(eg., "Garage Policy – Ontario", "Garage Policy – Quebec") if they provide.'
             - 'Strictly ignore values belonging to: "{invalid_coverage}" or headers like: "{invalid_headers}".'
             - 'Do not extract "line of business" in this field.'
 
