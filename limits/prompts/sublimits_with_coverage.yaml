@@ -15,12 +15,13 @@ what_to_extract:
           - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "$2,010,000 Aggregate", "$1,010,000 Each Occurrence").'
           - 'Do not extract the amount from these context "{invalid_headers}" headers cause these are invalid limits.'
           - '**extract the $ amount from the "TIV" means "total insured value" and its beakdown values.**'
+          - 'extract the $ amount from the "Attachment Point of First Limit of Liability". header.'
           - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
 
                    
         - sublimits and aggregate:
             - 'Extract the sub-limit label like ("{sublimits_and_aggregates}") found near the limit amount.'
-            - 'extract $/monetary amount under these headers like ("{sublimits_and_aggregates}").'
+            - 'extract $/monetary amount under these headers like ("{sublimits_and_aggregates}"), if they are multiple extract according each headers.'
             - 'Extract row-specific "{sublimits_and_aggregates}" labels ONLY if they appear in separate dedicated column headers or explicit standalone modifiers for that row.'
             - 'Do not extract words like "sublimit" or "aggregate" if they are already part of the textual sentence in the "coverage for limits" description.'
             - 'If no standalone row-level "{sublimits_and_aggregates}" label is found, omit this key.'
