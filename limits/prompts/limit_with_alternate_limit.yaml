@@ -1,0 +1,36 @@
+field: 'limits'
+
+also_appears_as: ["{limits}", "{alternate_limits}"]
+
+system_notes:
+  - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
+  - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt exactly. Do not infer, hallucinate, fabricate, or generate any values that are not explicitly supported by the input. Do not include example numbers or placeholder values in the output."
+
+what_to_extract:
+  limits:
+    description: |
+      A list where each item represents a single row of coverage and has:
+
+        - limit amount:
+          - 'Extract values related to policy limits of liability. These may or may not contain a currency symbol like "$" or "USD". (examples: "$60,100", "USD 2,010,000", "CAD 1,010,000", "1,200").'
+          - 'extract monetary value which may or may-not mention $/CAD/USD near these headers ("{limits}", "{alternate_limits}").'
+          - 'Do not extract the amount from these context "{invalid_headers}" headers cause these are invalid limits.'
+          - 'dont extract if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" because its invalid limits.'
+
+        - coverage for limits:
+          - 'Associated coverage given by "{coverage}", "Primary".'
+          - 'Ignore values that belong to "{invalid_coverage}".'
+          - 'Do not extract "line of business" in this field.'
+
+        - line_of_business:
+          - 'Extract the line of business (LOB) for each row.'
+          - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+          
+    rules:
+      - 'STRICT RULE: Headers like "{deductible}" belong to Deductibles only. Skip all values under these headers.'
+      - 'Skip extraction entries where "{deductible}"  is mentioned in row or column these are invalid limit amount.'
+      - 'Skip rows containing "{invalid_headers}", "form number", "form no", "premium values" or with no valid limit amount.'
+      - 'Skip rows and columns containing "premium", "form number", "form no", "premium values" or with no valid limit amount.'
+      - 'Preserve formatting exactly as shown in the source of image.'
+
+output_fields: ['limit amount','coverage for limits', 'line_of_business']

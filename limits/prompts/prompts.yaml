@@ -1,0 +1,50 @@
+field: 'limits'
+
+also_appears_as:
+  - '[Alternative document labels used to locate candidate limits]'
+
+system_notes:
+  - 'Extract only information supported by the source document.'
+  - 'Treat examples and reference lists as guidance, not document evidence.'
+  - 'Preserve source formatting for copied amounts and descriptions.'
+  - 'Use supplied reference labels only for fields requiring classification.'
+
+what_to_extract:
+  limits:
+    description: |
+      TASK:
+      Extract limits from tables, schedules, coverage sections, and standalone
+      statements. Return a list in source order. One entry represents one explicit
+      eligible amount associated with one coverage, insured item, vehicle, or
+      policy-level limit and its applicable basis. Multiple independently stated
+      amounts in one source row produce separate entries.
+
+      FIELD DEFINITIONS:
+
+      limit amount:
+        [Define eligible values and any basis text to include.]
+
+      sublimits and aggregate:
+        [Define the qualifier or header to capture.
+        Specify that its monetary amount belongs in limit amount.]
+
+      coverage for limits:
+        [Define the associated coverage description and its boundaries.]
+
+      line_of_business:
+        [Define how to select a label from the supplied LOB reference.]
+
+    rules:
+      - 'INCLUSION: [Which document values qualify for extraction.]'
+      - 'EXCLUSION: [Which values, cells, or entire entries to exclude.]'
+      - 'ASSOCIATION: [How amounts connect to coverage, headers, and LOB.]'
+      - 'SPLITTING: [When one source row produces multiple entries.]'
+      - 'MISSING VALUES: [When to omit an entry versus return null.]'
+      - 'CONFLICT PRIORITY: [Which rule takes precedence when rules overlap.]'
+      - 'VALIDATION: [Verify each amount and coverage belong together.]'
+
+output_fields:
+  - 'limit amount'
+  - 'sublimits and aggregate'
+  - 'coverage for limits'
+  - 'line_of_business'

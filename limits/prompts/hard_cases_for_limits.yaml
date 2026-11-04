@@ -1,6 +1,6 @@
 field: 'limits'
 
-also_appears_as: ["{Hard_cases_limits}"]
+also_appears_as: ["{Hard_cases_limits}", "Stated Limit or ACV"]
 system_notes:
   - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
   - "STRICT ADHERENCE: Follow all 'must' and 'ignore' constraints without exception. Follow the prompt do not hallucinate."
@@ -13,11 +13,17 @@ what_to_extract:
             - 'The numeric value or currency amount found under "Stated Limit or ACV" for each vehicle (e.g., "24,000", "$ 24,000", "USD 14,321").'
             - 'Do not extract amounts from premium rows (e.g., "Liability Premium", "Collision Premium", etc.).'
             - 'Do not extract deductible values (e.g., "1000 Ded").'
+            - 'Extract only the numeric amount under "Stated Limit or ACV" for each vehicle block.'
+            - 'Year, Liability Premium, and Stated Limit or ACV share the same column; select the stated-limit row below the premium row within that vehicle block.'
+            - 'Ignore premiums and deductibles. Omit vehicles with blank or unreadable stated limits; never infer missing amounts.'
 
         - autocoverage for limits:
             - 'The corresponding autocoverage headers "{auto_coverage}" with VIN numbers.'
             - 'Align limit amount with the "{auto_coverage}" coverage like an (example., "FORD PASSENGER VAN 1FDWE35L53HA63337").'
             - 'Do not extract coverage if "{invalid_coverage}" is mention.'
+            - 'Combine the Make & Model text and VIN from the same vehicle block as the extracted stated limit, using "{auto_coverage}" as guidance.'
+            - 'Join wrapped vehicle-description text with spaces. Preserve the printed VIN without inventing or correcting characters.'
+            - 'Omit the entire entry if its coverage matches "{invalid_coverage}". Never associate a limit with another vehicle.'
             
         - line_of_business:
           - 'Extract the line of business (LOB) for each row.'

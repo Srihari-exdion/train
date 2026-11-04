@@ -1,0 +1,74 @@
+field: 'limits'
+
+also_appears_as: ["{limits}", "TIV","Attachment Point", "Agreed Value"]
+
+system_notes:
+  - 'Extract only information supported by the source document.'
+  - 'Treat examples and reference lists as guidance, not document evidence.'
+  - 'Preserve source formatting for copied amounts and descriptions.'
+  - 'Use supplied reference labels only for fields requiring classification.'
+
+what_to_extract:
+  limits:
+    description: |
+      TASK:
+      Extract limits from tables, schedules, coverage sections, and standalone
+      statements. Return a list in source order. One entry represents one explicit
+      eligible amount associated with one coverage, insured item, vehicle, or
+      policy-level limit and its applicable basis. Multiple independently stated
+      amounts in one source row produce separate entries.
+
+      FIELD DEFINITIONS:
+
+      limit amount:
+        Copy the monetary limit exactly as printed, with or without a currency
+        symbol. Preserve currency codes, separators, decimals, abbreviations, and
+        directly attached basis text such as per-person, each occurrence, each
+        claim, or aggregate. Do not add a currency symbol or append text from a
+        separate header. Do not calculate, normalize, or infer an amount.
+        Eligible values include liability limits, sublimits, aggregates, underlying
+        limits, TIV and its explicitly listed breakdown, agreed or stated values,
+        monetary ACV values, and vehicle original-cost-new values. Include an
+        attachment amount only when explicitly identified as the attachment point
+        of a liability limit, rather than a deductible or retention.
+
+      sublimits and aggregate:
+        Copy the explicit qualifier governing this amount from its column header,
+        row-level label, or directly attached modifier. This may identify a sublimit,
+        aggregate, per-person, per-accident, per-occurrence, or per-claim basis.
+        Use "{sublimits_and_aggregates}" as recognition guidance; copy the wording
+        actually present in the document rather than substituting a reference label.
+        The associated monetary amount belongs in limit amount, not in this field.
+        Do not collect qualifiers belonging to other amounts or copy words merely
+        because they occur within the coverage description. If no explicit qualifier
+        governs this amount, return null.
+
+      coverage for limits:
+        Copy the complete associated coverage or insured-item description, using
+        "{coverage}" as recognition guidance. Include a parent coverage or section
+        identifier only when needed to identify a nested row unambiguously.
+        For vehicle valuations, use the vehicle description and VIN printed in the
+        same vehicle row or block; include only identifiers that are available.
+        For vehicle coverage limits, use the coverage name and its printed unit or
+        covered-auto identifier where present. Never borrow another vehicle's VIN.
+        For an explicitly standalone policy aggregate, TIV, or attachment amount,
+        use its printed descriptive label when no separate coverage is provided.
+        Preserve source wording and identifiers; join wrapped description lines
+        with spaces. Exclude unrelated neighboring rows, premium or deductible
+        descriptions, and LOB labels used only for classification.
+
+      line_of_business:
+          - 'Extract the line of business (LOB) for each row.'
+          - 'Identify the Line of Business (LOB) for the each row from the referred LOB below.'
+
+    rules:
+      - 'INCLUSION: Extract every explicit eligible monetary amount, including standalone statements and values without a currency symbol. Determine eligibility from the governing label and document context, not the size of the number. Extract both a stated total and its listed breakdown when each has its own description; do not compute missing totals. An alternative label locates a candidate but does not establish eligibility by itself.'
+      - 'EXCLUSION: Exclude values governed by "{deductible}", Deductible, Ded, Retention, Self-Insured Retention, SIR, Retained Limits, Waiting Period, Premium, fees, taxes, or other non-limit labels. Exclude dates, years, identifiers, form numbers, percentages without an explicit monetary limit, and amounts governed by {invalid_headers} or associated with {invalid_coverage}. Exclude entries explicitly marked Not Covered or Not Applicable. Apply exclusions to the governed cell, amount, or coverage; do not discard a valid limit merely because another column in the same row contains a premium or deductible. A generic Attachment or Excess of label alone is insufficient to establish an eligible limit.'
+      - 'ASSOCIATION: Match each amount to its governing column and row, then to its enclosing coverage section or vehicle block. Follow explicit table structure across wrapped lines and vertical gaps. In stacked vehicle grids, match each value to the corresponding stacked label; distinguish year, premium, and stated limit within the same column. Use section context only when it clearly governs the amount. Never associate values across unrelated rows, sections, or vehicles, and never assume a fixed column position determines the value type.'
+      - 'SPLITTING: Create a separate entry for each independently stated eligible amount, including separate each-claim, each-occurrence, aggregate, vehicle, and coverage-column values. Assign each its own qualifier and associated coverage. Never combine independent amounts into a comma-separated string. Preserve separate entries when identical amounts belong to different coverages, vehicles, or bases. Do not duplicate a source amount merely because multiple candidate labels identify it.'
+      - 'MISSING VALUES: Omit an entry when its amount is missing, unreadable, ineligible, or cannot be unambiguously associated with a source coverage or permitted standalone description. Do not infer values for blank cells, bare currency symbols, dashes, or N/A. Keep an explicitly printed zero when it is a valid limit. For every retained entry, return all four output fields; use null only for an unsupported sublimits and aggregate qualifier or line_of_business classification. Return an empty list when there are no valid entries.'
+      - 'CONFLICT PRIORITY: Explicit source labels and the most specific governing cell, row, or section determine eligibility and association before broad candidate-label matches or proximity. Exclusion of a value as a deductible, retention, premium, or other non-limit takes precedence over an inclusion keyword attached to that same value. A neighboring excluded cell does not override a valid limit header. Apply splitting after eligibility and association, then apply missing-value handling. If the governing context remains contradictory or ambiguous, omit the entry rather than guessing.'
+      - 'VALIDATION: Before returning each entry, verify that the amount appears in the source, its governing context is eligible, and its coverage, qualifier, and vehicle identifiers belong to that amount. Verify that separate amounts have not been merged, distinct source entries have not been collapsed, and no unsupported text or example values were introduced. Confirm that line_of_business is either an exact supplied reference label or null and that each entry contains exactly the four output fields.'
+
+output_fields: ['limit amount','sublimits and aggregate','coverage for limits', 'line_of_business']
+
