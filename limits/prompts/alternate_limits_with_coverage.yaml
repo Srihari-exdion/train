@@ -16,8 +16,9 @@ what_to_extract:
             - 'if multiple "{alternate_limits}" appear with different headers extract all $ amount under these header.'
             - 'if there is any context of "{deductible}", "Comprehensive Deductible", "Collision Deductible" dont extract cause its invalid limits.'
             - 'Do not extract the amount from premium.'
+
         - coverage for limits:
-            - 'assosisated description given by "{coverage}" etc.'
+            - 'assosisated coverage given under these "{coverage}".'
             - 'Ignore values that belong to "{invalid_coverage}".'
             - 'Do not extract "line of business" in this field.'
 
