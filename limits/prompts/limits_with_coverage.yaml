@@ -1,6 +1,6 @@
 field: 'limits'
 
-also_appears_as: ["{limits}", "Amount", "Agreed Value"]
+also_appears_as: ["{limits}", "Amount", "Agreed Value", "Coverage Amounts"]
 
 system_notes:
   - "REFERENCE ONLY: All examples provided in descriptions are for reference and context. Do not extract the example text itself unless it literally appears in the document."
@@ -18,7 +18,7 @@ what_to_extract:
             - 'always dont extract two $ amounts in one string, separate them with respective headers and Coverage.'
 
         - coverage for limits:
-            - 'Associated coverage description given under these headers "Title","Hull", "{coverage}".'
+            - 'Associated coverage description given under these headers "Title","Hull","Building","Contents", "{coverage}".'
             - 'extract limit amount with their respective "Title"(eg., "Garage Policy – Ontario", "Garage Policy – Quebec") if they provide.'
             - 'sometimes if no coverage mentioned extract belonging description (ex., "building", "Contents").'
             - 'Strictly ignore values belonging to: "{invalid_coverage}" or headers like: "{invalid_headers}".'
