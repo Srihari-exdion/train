@@ -19,6 +19,7 @@ what_to_extract:
 
         - coverage for limits:
             - 'Associated coverage description given under these headers "Title","Hull","Building","Contents", "{coverage}".'
+            - 'extract "{Building_numbers}" along with their respective limit amount and coverage if they provide.'
             - 'extract limit amount with their respective "Title"(eg., "Garage Policy – Ontario", "Garage Policy – Quebec") if they provide.'
             - 'sometimes if no coverage mentioned extract belonging description (ex., "building", "Contents").'
             - 'Strictly ignore values belonging to: "{invalid_coverage}" or headers like: "{invalid_headers}".'

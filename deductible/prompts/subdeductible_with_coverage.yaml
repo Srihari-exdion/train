@@ -10,7 +10,8 @@ what_to_extract:
         - deductible amount:
           - 'Must contain only currency values related to policy deductible (examples: "$500", "20 hours", **"10%"**,"5% subj. to a $ 1000 min", "$250,000.00 each Claim", "$1,000 deductible", "$100,000 Minus").' "{extra_info}"
           - 'If there are two deductible values on the same row (e.g., "{sublimits_and_aggregates}"),combine them into a single string separated by a comma.'
-          - 'Don't extract the amount from premium , "{deductible_invalid}"'.
+          - 'Extract every monetary value and its belonging coverage from the same line or sentence as the deductible amount.'
+          - 'Don't extract the amount from premium , "{deductible_invalid}".'
           - 'Include "Waiting Period" values (e.g., "48hours") in the same field.'
           - **'extract deductibles from every line every sentences in the image.'** 
 
@@ -23,6 +24,7 @@ what_to_extract:
 
         - coverage for deductible:
           - 'Extract the full description from the "{coverages}" column that is on the same row as the deductible amount.'
+          - 'extract monetary values and its belonging coverage from the same line or sentence as the deductible amount.'
           - 'For waiting periods, use "Waiting Period" as the coverage.' 
 
         - line_of_business:

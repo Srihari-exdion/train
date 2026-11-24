@@ -18,15 +18,14 @@ what_to_extract:
           - 'Associated description given by "{coverage}".'
           - 'For waiting periods, use "Waiting Period" as the coverage.'
           - **'Extract the full description from the "Coverage" column that is on the same row as the deductible amount.'**
+          - 'extract monetary values and its belonging coverage from the same line or sentence as the deductible amount.'
           - 'extract data from rows that have a numerical deductible amount or valid time period only which are ends with "hour", "hours" (e.g., "24 hours").'
         
         - line_of_business:
           - 'extract the line_of_business(lob) from the page.'
 
   rules: 
-     - 'Skip rows containing "{invalid_headers}", "form number", "form no" these are invalid deductible amount.'
-     - 'Ignore related to "{invalid_coverage}" these are invalid deductible coverages.'
-     - 'Do not leave "coverage for deductible" blank — always pull the description from the same row as the deductible.'
+     - 'Do not leave "coverage for deductible" blank — always pull the description from the same row/line as the deductible.'
      - 'If a key has "NOT APPLICABLE" in the value omit the key entirely (do not return null or "").'
      - 'If there are multiple deductible amounts with different coverages extract all with their respective coverage.'
      - 'Extract data from rows that have a time period only with the unit "hours" or "hour" (e.g., "72 hours").'
