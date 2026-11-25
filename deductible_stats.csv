@@ -95,7 +95,7 @@ description_coverage.yaml,description_coverage.yaml,True,92
 single_retained_limit.yaml,single_retained_limit.yaml,True,93
 retrained_limit.yaml,retrained_limit.yaml,True,94
 retrained_limit.yaml,retrained_limit.yaml,True,95
-subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,96
+subdeductible_with_coverage.yaml,header_test.yaml,False,96
 deductible_with_section_coverage.yaml,deductible_with_section_coverage.yaml,True,97
 deductible_with_section_coverage.yaml,deductible_with_section_coverage.yaml,True,98
 new_subdeductible-1.yaml,new_subdeductible-1.yaml,True,99
@@ -129,7 +129,7 @@ subdeductible_with_section_coverage.yaml,subdeductible_with_section_coverage.yam
 subdeductible_with_section_coverage.yaml,subdeductible_with_section_coverage.yaml,True,127
 subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,128
 subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,129
-subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,130
+subdeductible_with_coverage.yaml,deductible_with_coverage.yaml,False,130
 deductible_with_coverage.yaml,deductible_with_coverage.yaml,True,131
 horizontal_align_with_coverage.yaml,horizontal_align_with_coverage.yaml,True,132
 tabular_under_tag.yaml,tabular_under_tag.yaml,True,133
@@ -155,7 +155,7 @@ only_hours.yaml,only_hours.yaml,True,152
 retention_undertag.yaml,retention_undertag.yaml,True,153
 header_test.yaml,header_test.yaml,True,154
 header_test.yaml,header_test.yaml,True,155
-subdeductible_with_coverage.yaml,header_test.yaml,False,156
+subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,156
 header_test.yaml,header_test.yaml,True,157
 top_header_retention.yaml,top_header_retention.yaml,True,158
 header_test.yaml,header_test.yaml,True,159
@@ -245,3 +245,5 @@ waiting_period.yaml,waiting_period.yaml,True,242
 deductible_with_auto_coverage.yaml,deductible_with_auto_coverage.yaml,True,243
 deductible_with_twocoverage.yaml,deductible_with_twocoverage.yaml,True,244
 subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,245
+subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,246
+subdeductible_with_coverage.yaml,subdeductible_with_coverage.yaml,True,247
