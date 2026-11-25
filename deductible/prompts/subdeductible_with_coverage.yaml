@@ -24,7 +24,7 @@ what_to_extract:
 
         - coverage for deductible:
           - 'Extract the full description from the "{coverages}" column that is on the same row as the deductible amount.'
-          - 'extract monetary values and its belonging coverage from the same line or sentence as the deductible amount.'
+          - 'If there is no explicit coverage, use the default "{deductible}" header.'
           - 'For waiting periods, use "Waiting Period" as the coverage.' 
 
         - line_of_business:
